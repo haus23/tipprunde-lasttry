@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
-    "noEmit": true
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
   }
 }

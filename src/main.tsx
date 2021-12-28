@@ -1,4 +1,14 @@
+import ReactDOM from 'react-dom';
+import React from 'react';
+
 import './styles.css';
+import { App } from './App';
 
 const container = document.getElementById('root');
-container.insertAdjacentHTML('afterbegin', '<h1>runde.tips</h1>');
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  container
+);
