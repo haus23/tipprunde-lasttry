@@ -6,7 +6,8 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["vitest/global"]
   },
   "include": ["./src"]
 }
