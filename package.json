@@ -7,6 +7,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext .ts,.tsx",
     "test": "vitest",
+    "sb": "start-storybook -p 9001",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -14,6 +15,9 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/react": "^6.4.9",
     "@testing-library/react": "^12.1.2",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
