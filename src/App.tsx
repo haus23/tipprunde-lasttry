@@ -1,1 +1,3 @@
-export const App = () => <h1>runde.tips</h1>;
+export const App = () => (
+  <h1 className="m-4 text-2xl font-semibold">runde.tips</h1>
+);
