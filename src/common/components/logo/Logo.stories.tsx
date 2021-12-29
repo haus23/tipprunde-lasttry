@@ -5,6 +5,13 @@ export default {
   title: 'Atoms/Logo',
   component: Logo,
   args: {},
+  decorators: [
+    (Story) => (
+      <div className="flex items-center justify-center py-4">
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof Logo>;
 
 const Template: ComponentStory<typeof Logo> = ({ ...args }) => (

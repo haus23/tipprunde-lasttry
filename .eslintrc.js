@@ -14,6 +14,9 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
   },
+  rules: {
+    'react/prop-types': 'off',
+  },
   settings: {
     react: {
       version: 'detect',

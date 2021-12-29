@@ -3,12 +3,15 @@ import React from 'react';
 
 import './styles.css';
 import { App } from './App';
+import { AppContext } from './common/context/AppContext';
 
 const container = document.getElementById('root');
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppContext>
+      <App />
+    </AppContext>
   </React.StrictMode>,
   container
 );
