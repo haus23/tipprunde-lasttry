@@ -1,9 +1,12 @@
-import { Header } from './front-of-house/components/header/Header';
+import { Route, Routes } from 'react-router-dom';
+import { Backyard } from './backyard/Backyard';
+import { FrontOfHouse } from './front-of-house/FrontOfHouse';
 
 export const App = () => {
   return (
-    <>
-      <Header />
-    </>
+    <Routes>
+      <Route path="/*" element={<FrontOfHouse />} />
+      <Route path="/hinterhof/*" element={<Backyard />} />
+    </Routes>
   );
 };
