@@ -11,7 +11,7 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <RecoilRoot>
-      <div className="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-50">
+      <div className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-50">
         <Story />
       </div>
     </RecoilRoot>

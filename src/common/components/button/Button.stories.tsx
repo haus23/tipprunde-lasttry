@@ -7,7 +7,7 @@ export default {
   argTypes: { onClick: { action: 'clicked' } },
   decorators: [
     (Story) => (
-      <div className="bg-white dark:bg-gray-900 p-8">
+      <div className="p-8">
         <Story />
       </div>
     ),

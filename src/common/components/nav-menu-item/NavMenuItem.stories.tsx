@@ -9,7 +9,7 @@ export default {
   args: {},
   decorators: [
     (Story) => (
-      <Menu as="div" className="bg-white dark:bg-gray-800 py-8">
+      <Menu as="div" className="py-8">
         <Story />
       </Menu>
     ),
