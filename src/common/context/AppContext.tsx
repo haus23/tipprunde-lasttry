@@ -1,18 +1,49 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
-import { ThemeContext } from './ThemeContext';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAuth } from '../hooks/use-auth';
+
+import { darkModeState } from '../state/dark-mode-state';
+import { themeState } from '../state/theme-state';
 
 export type AppContextProps = {
   children: ReactNode;
 };
 
 export const AppContext = ({ children }: AppContextProps) => {
-  return (
-    <RecoilRoot>
-      <ThemeContext>
-        <BrowserRouter>{children}</BrowserRouter>
-      </ThemeContext>
-    </RecoilRoot>
-  );
+  //
+  // Authentication
+  //
+  useAuth();
+
+  //
+  // Theme handling
+  //
+  const theme = useRecoilValue(themeState);
+  const setDarkMode = useSetRecoilState(darkModeState);
+
+  useEffect(() => {
+    // DOM API
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const setDarkClass = (darkMode: boolean) => {
+      if (darkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    const isSystemDark = darkModeQuery.matches;
+    const darkMode = (theme === 'system' && isSystemDark) || theme === 'dark';
+    setDarkMode(darkMode);
+
+    if (theme === 'system') {
+      localStorage.removeItem('theme');
+    } else {
+      localStorage.setItem('theme', theme);
+    }
+    setDarkClass(darkMode);
+  }, [theme, setDarkMode]);
+
+  return <BrowserRouter>{children}</BrowserRouter>;
 };

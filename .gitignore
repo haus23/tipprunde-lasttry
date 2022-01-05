@@ -3,3 +3,6 @@ node_modules/
 
 # Vite output
 dist/
+
+# Sensible data
+.env.local
