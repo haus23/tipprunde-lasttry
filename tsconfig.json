@@ -7,7 +7,6 @@
     "moduleResolution": "node",
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vitest/global", "@testing-library/jest-dom"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
