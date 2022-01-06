@@ -1,6 +1,7 @@
 import { ReactNode, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { SplashScreen } from '../components/splash-screen/SplashScreen';
 import { useAuth } from '../hooks/use-auth';
 
 import { darkModeState } from '../state/dark-mode-state';
@@ -14,7 +15,7 @@ export const AppContext = ({ children }: AppContextProps) => {
   //
   // Authentication
   //
-  useAuth();
+  const { isAuthenticating } = useAuth();
 
   //
   // Theme handling
@@ -45,5 +46,10 @@ export const AppContext = ({ children }: AppContextProps) => {
     setDarkClass(darkMode);
   }, [theme, setDarkMode]);
 
-  return <BrowserRouter>{children}</BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <SplashScreen show={isAuthenticating} />
+      {isAuthenticating ? undefined : children}
+    </BrowserRouter>
+  );
 };
