@@ -33,6 +33,6 @@ HiddenLabel.args = {
 export const WithError = Template.bind({});
 WithError.args = {
   label: 'PLZ',
-  placeHolder: 'Postleitzahl',
+  placeholder: 'Postleitzahl',
   errorMsg: 'Zwingend fünf Ziffern',
 };
