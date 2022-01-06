@@ -5,7 +5,7 @@ export const Layout = () => {
   return (
     <>
       <Header />
-      <div className="mt-8 max-w-3xl mx-auto px-4">
+      <div className="sm:mt-4 max-w-3xl mx-auto p-4">
         <Outlet />
       </div>
     </>
