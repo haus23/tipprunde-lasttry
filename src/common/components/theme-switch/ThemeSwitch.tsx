@@ -13,7 +13,7 @@ export const ThemeSwitch = () => {
   const { theme, setTheme, darkMode } = useDarkMode();
 
   return (
-    <Menu as="div" className="flex relative z-10">
+    <Menu as="div" className="flex relative z-20">
       <Menu.Button as={NavButton}>
         {darkMode ? (
           <MoonIcon className="h-6 w-6 m-1" />
