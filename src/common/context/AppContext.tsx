@@ -1,6 +1,7 @@
 import { ReactNode, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Notifications } from '../components/notifications/Notifications';
 import { SplashScreen } from '../components/splash-screen/SplashScreen';
 import { useAuth } from '../hooks/use-auth';
 
@@ -49,6 +50,7 @@ export const AppContext = ({ children }: AppContextProps) => {
   return (
     <BrowserRouter>
       <SplashScreen show={isAuthenticating} />
+      <Notifications />
       {isAuthenticating ? undefined : children}
     </BrowserRouter>
   );

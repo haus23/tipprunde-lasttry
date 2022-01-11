@@ -8,6 +8,7 @@ import { Button } from '@/common/components/button/Button';
 import { UserIcon } from '@heroicons/react/outline';
 import { useAuth } from '@/common/hooks/use-auth';
 import { UserProfile } from '@/common/state/auth-state';
+import { notify } from '@/common/components/notifications/Notifications';
 
 export const Profile = () => {
   const { user, updateProfile } = useAuth();
@@ -15,7 +16,10 @@ export const Profile = () => {
   const [updatedAvatar, setAvatar] = useState<File>(null);
 
   const onSubmit: SubmitHandler<UserProfile> = async ({ name }) => {
-    updateProfile({ name: name.trim(), avatar: updatedAvatar });
+    notify(
+      updateProfile({ name: name.trim(), avatar: updatedAvatar }),
+      'Profil erfolgreich geändert.'
+    );
   };
 
   const { register, handleSubmit } = useForm<UserProfile>({

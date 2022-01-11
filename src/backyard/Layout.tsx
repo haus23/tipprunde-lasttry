@@ -1,5 +1,6 @@
-import { ThemeSwitch } from '@/common/components/theme-switch/ThemeSwitch';
 import { Outlet } from 'react-router-dom';
+
+import { ThemeSwitch } from '@/common/components/theme-switch/ThemeSwitch';
 import { Sidebar } from './components/sidebar/Sidebar';
 
 export const Layout = () => {
