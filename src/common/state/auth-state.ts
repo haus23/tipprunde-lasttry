@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-type UserProfile = {
+export type UserProfile = {
   email: string;
   name: string;
   imageUrl: string;

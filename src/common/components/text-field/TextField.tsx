@@ -33,7 +33,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               ref={ref}
               {...props}
               className={classNames(
-                'mt-2 shadow-sm block w-full sm:text-sm rounded-md dark:bg-gray-900',
+                'mt-2 shadow-sm block w-full sm:text-sm rounded-md dark:bg-gray-900 disabled:bg-gray-100 dark:disabled:bg-gray-800',
                 hasError
                   ? 'pr-10 dark:border-2 border-red-300 dark:border-red-600 text-red-900 dark:text-red-500 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
                   : 'border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500'

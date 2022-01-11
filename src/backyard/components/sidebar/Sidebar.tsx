@@ -27,17 +27,19 @@ export const Sidebar = () => {
           <div className="flex-shrink-0 w-full block">
             <div className="flex items-center">
               <div>
-                <UserIcon className="inline-block h-9 w-9 p-1 rounded-full bg-gray-200 dark:bg-gray-900 text-gray-400 dark:text-gray-300" />
-                {/*
-                <img
-                  className="inline-block h-9 w-9 rounded-full
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                /> */}
+                {user.imageUrl ? (
+                  <img
+                    className="inline-block h-9 w-9 rounded-full"
+                    src={user.imageUrl}
+                    alt="User Avatar"
+                  />
+                ) : (
+                  <UserIcon className="inline-block h-9 w-9 p-1 rounded-full bg-gray-200 dark:bg-gray-900 text-gray-400 dark:text-gray-300" />
+                )}
               </div>
               <div className="ml-3 grow">
                 <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                  {user.email}
+                  {user.name ? user.name : user.email}
                 </p>
                 <div className="text-xs font-medium text-gray-500 dark:text-gray-400 flex gap-x-1">
                   <Link
