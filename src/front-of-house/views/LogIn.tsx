@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { TextField } from '@/common/components/text-field/TextField';
 import { Button } from '@/common/components/button/Button';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Location, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/common/hooks/use-auth';
 
 type LoginFormType = {
@@ -11,22 +11,33 @@ type LoginFormType = {
 };
 
 export const LogIn = () => {
-  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const { user, logIn } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/', { replace: true });
+    }
+  }, [user, navigate]);
+
+  const [error, setError] = useState('');
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormType>();
-  const { logIn } = useAuth();
+
+  const state = location.state as { from: Location } | null;
+  const from = state?.from.pathname || '/';
 
   const onSubmit: SubmitHandler<LoginFormType> = async ({
     email,
     password,
   }) => {
     try {
-      await logIn(email, password, () => navigate('/'));
+      await logIn(email, password, () => navigate(from, { replace: true }));
     } catch {
       setError('Email und/oder Passwort falsch!');
     }
