@@ -1,8 +1,8 @@
-import { useAuth } from '@/common/hooks/use-auth';
+import { useUser } from '@/common/hooks/use-user';
 import { useEffect } from 'react';
 
 export const LogOut = () => {
-  const { logOut } = useAuth();
+  const { logOut } = useUser();
 
   useEffect(() => {
     logOut();

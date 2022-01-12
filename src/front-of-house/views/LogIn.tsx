@@ -1,9 +1,9 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { TextField } from '@/common/components/text-field/TextField';
 import { Button } from '@/common/components/button/Button';
-import { useAuth } from '@/common/hooks/use-auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '@/common/hooks/use-user';
 
 type LoginFormType = {
   email: string;
@@ -19,7 +19,7 @@ export const LogIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormType>();
-  const { logIn } = useAuth();
+  const { logIn } = useUser();
 
   const onSubmit: SubmitHandler<LoginFormType> = async ({
     email,

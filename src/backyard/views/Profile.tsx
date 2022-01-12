@@ -6,23 +6,24 @@ import { TextField } from '@/common/components/text-field/TextField';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { UserIcon } from '@heroicons/react/outline';
-import { useAuth } from '@/common/hooks/use-auth';
-import { UserProfile } from '@/common/state/auth-state';
 import { notify } from '@/common/components/notifications/Notifications';
+import { useUser } from '@/common/hooks/use-user';
+import { User } from '@/api/firebase/auth';
 
 export const Profile = () => {
-  const { user, updateProfile } = useAuth();
-  const [imageUrl, setImageUrl] = useState(user.imageUrl);
+  const { user, updateProfile } = useUser();
+  const [imageUrl, setImageUrl] = useState(user.photoURL);
   const [updatedAvatar, setAvatar] = useState<File>(null);
 
-  const onSubmit: SubmitHandler<UserProfile> = async ({ name }) => {
+  const onSubmit: SubmitHandler<User> = async ({ displayName }) => {
+    displayName = displayName.trim();
     notify(
-      updateProfile({ name: name.trim(), avatar: updatedAvatar }),
+      updateProfile({ displayName, avatar: updatedAvatar }),
       'Profil erfolgreich geändert.'
     );
   };
 
-  const { register, handleSubmit } = useForm<UserProfile>({
+  const { register, handleSubmit } = useForm<User>({
     defaultValues: user,
   });
 
@@ -55,7 +56,7 @@ export const Profile = () => {
             />
           </div>
           <div>
-            <TextField label="Name" {...register('name')} />
+            <TextField label="Name" {...register('displayName')} />
           </div>
           <div>
             <label className="block">

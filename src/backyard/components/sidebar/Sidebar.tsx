@@ -1,11 +1,11 @@
 import { Logo } from '@/common/components/logo/Logo';
-import { useAuth } from '@/common/hooks/use-auth';
+import { useUser } from '@/common/hooks/use-user';
 import { HomeIcon, UserIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { SidebarLink } from '../sidebar-link/SidebarLink';
 
 export const Sidebar = () => {
-  const { user } = useAuth();
+  const { user } = useUser();
 
   return (
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
@@ -27,10 +27,10 @@ export const Sidebar = () => {
           <div className="flex-shrink-0 w-full block">
             <div className="flex items-center">
               <div>
-                {user.imageUrl ? (
+                {user.photoURL ? (
                   <img
                     className="inline-block h-9 w-9 rounded-full"
-                    src={user.imageUrl}
+                    src={user.photoURL}
                     alt="User Avatar"
                   />
                 ) : (
@@ -39,7 +39,7 @@ export const Sidebar = () => {
               </div>
               <div className="ml-3 grow">
                 <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                  {user.name ? user.name : user.email}
+                  {user.displayName ? user.displayName : user.email}
                 </p>
                 <div className="text-xs font-medium text-gray-500 dark:text-gray-400 flex gap-x-1">
                   <Link

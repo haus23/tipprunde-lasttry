@@ -15,7 +15,7 @@ export const AppContext = ({ children }: AppContextProps) => {
   //
   // Authentication
   //
-  const { isAuthenticating } = useAuth();
+  const isAuthenticating = useAuth();
 
   //
   // Theme handling

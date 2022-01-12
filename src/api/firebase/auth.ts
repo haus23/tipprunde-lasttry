@@ -12,6 +12,8 @@ const signIn = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);
 
 const signOut = () => signOutFromFirebase(auth);
-const updateFirebaseProfile = updateProfile;
 
-export { auth, signIn, signOut, updateFirebaseProfile };
+const update = (displayName: string, photoURL: string) =>
+  updateProfile(auth.currentUser, { displayName, photoURL });
+
+export { auth, signIn, signOut, update };

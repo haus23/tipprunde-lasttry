@@ -1,86 +1,29 @@
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 
-import {
-  auth as firebaseAuth,
-  signIn,
-  signOut,
-  updateFirebaseProfile,
-} from '@/api/firebase/auth';
-import { authState } from '../state/auth-state';
-import { uploadBytes } from '@firebase/storage';
-import { storageRef, getDownloadURL } from '@/api/firebase/storage';
-import { useNavigate } from 'react-router-dom';
-
-async function getImageUrl(url) {
-  return url ? await getDownloadURL(storageRef(url)) : '';
-}
+import { auth as firebaseAuth } from '@/api/firebase/auth';
+import { userState } from '../state/user-state';
 
 export function useAuth() {
-  const [auth, setAuth] = useRecoilState(authState);
-  const navigate = useNavigate();
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+
+  const setUser = useSetRecoilState(userState);
 
   useEffect(() => {
     return firebaseAuth.onAuthStateChanged(async (user) => {
-      setAuth({
-        isAuthenticating: false,
-        user: user
+      setUser(
+        user
           ? {
-              email: user.email as string,
-              name: user.displayName || '',
-              imageUrl: await getImageUrl(user.photoURL),
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              photoURL: user.photoURL,
             }
-          : null,
-      });
+          : null
+      );
+      setIsAuthenticating(false);
     });
-  }, [setAuth]);
+  }, [setUser]);
 
-  const logIn = async (email: string, password: string) => {
-    try {
-      await signIn(email, password);
-      return true;
-    } catch {
-      return false;
-    }
-  };
-
-  const logOut = async () => {
-    await signOut();
-    navigate('/');
-  };
-
-  const updateProfile = async ({
-    name,
-    avatar,
-  }: {
-    name: string;
-    avatar: File | null;
-  }) => {
-    let photoURL = firebaseAuth.currentUser.photoURL;
-
-    if (avatar) {
-      const getExtension = (str) => str.slice(str.lastIndexOf('.'));
-      const filename = `profile-images/${
-        firebaseAuth.currentUser.uid
-      }${getExtension(avatar.name)}`;
-      const imageRef = storageRef(filename);
-      const result = await uploadBytes(imageRef, avatar);
-      photoURL = result.metadata.fullPath;
-    }
-
-    await updateFirebaseProfile(firebaseAuth.currentUser, {
-      displayName: name,
-      photoURL,
-    });
-    setAuth({
-      isAuthenticating: false,
-      user: {
-        email: firebaseAuth.currentUser?.email,
-        name,
-        imageUrl: await getImageUrl(photoURL),
-      },
-    });
-  };
-
-  return { ...auth, logIn, logOut, updateProfile };
+  return isAuthenticating;
 }
