@@ -10,6 +10,7 @@ import {
 import { authState } from '../state/auth-state';
 import { uploadBytes } from '@firebase/storage';
 import { storageRef, getDownloadURL } from '@/api/firebase/storage';
+import { useNavigate } from 'react-router-dom';
 
 async function getImageUrl(url) {
   return url ? await getDownloadURL(storageRef(url)) : '';
@@ -17,6 +18,7 @@ async function getImageUrl(url) {
 
 export function useAuth() {
   const [auth, setAuth] = useRecoilState(authState);
+  const navigate = useNavigate();
 
   useEffect(() => {
     return firebaseAuth.onAuthStateChanged(async (user) => {
@@ -40,6 +42,11 @@ export function useAuth() {
     } catch {
       return false;
     }
+  };
+
+  const logOut = async () => {
+    await signOut();
+    navigate('/');
   };
 
   const updateProfile = async ({
@@ -75,5 +82,5 @@ export function useAuth() {
     });
   };
 
-  return { ...auth, logIn, logOut: signOut, updateProfile };
+  return { ...auth, logIn, logOut, updateProfile };
 }

@@ -1,10 +1,12 @@
 import { useAuth } from '@/common/hooks/use-auth';
-import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const LogOut = () => {
   const { logOut } = useAuth();
 
-  logOut();
+  useEffect(() => {
+    logOut();
+  }, [logOut]);
 
-  return <Navigate replace to="/" />;
+  return null;
 };

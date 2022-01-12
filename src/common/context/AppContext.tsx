@@ -1,5 +1,4 @@
 import { ReactNode, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Notifications } from '../components/notifications/Notifications';
 import { SplashScreen } from '../components/splash-screen/SplashScreen';
@@ -48,10 +47,10 @@ export const AppContext = ({ children }: AppContextProps) => {
   }, [theme, setDarkMode]);
 
   return (
-    <BrowserRouter>
+    <>
       <SplashScreen show={isAuthenticating} />
       <Notifications />
       {isAuthenticating ? undefined : children}
-    </BrowserRouter>
+    </>
   );
 };
