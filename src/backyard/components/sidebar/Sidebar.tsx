@@ -1,11 +1,11 @@
 import { Logo } from '@/common/components/logo/Logo';
-import { useUser } from '@/common/hooks/use-user';
+import { useAuth } from '@/common/hooks/use-auth';
 import { HomeIcon, UserIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { SidebarLink } from '../sidebar-link/SidebarLink';
 
 export const Sidebar = () => {
-  const { user } = useUser();
+  const { user } = useAuth();
 
   return (
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">

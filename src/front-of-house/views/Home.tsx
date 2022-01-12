@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from '@/common/hooks/use-auth';
 import { Button } from '@/common/components/button/Button';
-import { useUser } from '@/common/hooks/use-user';
 
 export const Home = () => {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user } = useAuth();
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow-md flex flex-col gap-y-4">

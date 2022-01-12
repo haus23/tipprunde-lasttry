@@ -1,29 +1,47 @@
-import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
-import { auth as firebaseAuth } from '@/api/firebase/auth';
+import { signIn, signOut, update } from '@/api/firebase/auth';
+import { uploadUserImage } from '@/api/firebase/storage';
+
 import { userState } from '../state/user-state';
 
 export function useAuth() {
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [user, setUser] = useRecoilState(userState);
 
-  const setUser = useSetRecoilState(userState);
+  const logIn = async (
+    email: string,
+    password: string,
+    successHandler: () => void
+  ) => {
+    await signIn(email, password);
+    successHandler();
+  };
 
-  useEffect(() => {
-    return firebaseAuth.onAuthStateChanged(async (user) => {
-      setUser(
-        user
-          ? {
-              uid: user.uid,
-              displayName: user.displayName,
-              email: user.email,
-              photoURL: user.photoURL,
-            }
-          : null
-      );
-      setIsAuthenticating(false);
+  const logOut = async (successHandler: () => void) => {
+    await signOut();
+    successHandler();
+  };
+
+  const updateProfile = async ({
+    displayName,
+    avatar,
+  }: {
+    displayName: string;
+    avatar: File | null;
+  }) => {
+    let photoURL = user.photoURL;
+
+    if (avatar) {
+      photoURL = await uploadUserImage(avatar);
+    }
+
+    await update(displayName, photoURL);
+    setUser({
+      ...user,
+      displayName,
+      photoURL,
     });
-  }, [setUser]);
+  };
 
-  return isAuthenticating;
+  return { user, logIn, logOut, updateProfile };
 }

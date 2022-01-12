@@ -1,17 +1,18 @@
 import { Fragment, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
-
-import { ThemeSwitch } from '@/common/components/theme-switch/ThemeSwitch';
-import { Sidebar } from './components/sidebar/Sidebar';
-import { classNames } from '@/common/helper/class-names';
 import { HomeIcon, MenuIcon, UserIcon, XIcon } from '@heroicons/react/outline';
-import { SidebarLink } from './components/sidebar-link/SidebarLink';
+
+import { useAuth } from '@/common/hooks/use-auth';
+
 import { Logo } from '@/common/components/logo/Logo';
-import { useUser } from '@/common/hooks/use-user';
+import { ThemeSwitch } from '@/common/components/theme-switch/ThemeSwitch';
+import { classNames } from '@/common/helper/class-names';
+import { Sidebar } from './components/sidebar/Sidebar';
+import { SidebarLink } from './components/sidebar-link/SidebarLink';
 
 export const Layout = () => {
-  const { user } = useUser();
+  const { user } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (

@@ -1,12 +1,15 @@
-import { useUser } from '@/common/hooks/use-user';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from '@/common/hooks/use-auth';
 
 export const LogOut = () => {
-  const { logOut } = useUser();
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    logOut();
-  }, [logOut]);
+    logOut(() => navigate('/'));
+  }, [logOut, navigate]);
 
   return null;
 };

@@ -3,7 +3,7 @@ import { TextField } from '@/common/components/text-field/TextField';
 import { Button } from '@/common/components/button/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '@/common/hooks/use-user';
+import { useAuth } from '@/common/hooks/use-auth';
 
 type LoginFormType = {
   email: string;
@@ -19,16 +19,15 @@ export const LogIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormType>();
-  const { logIn } = useUser();
+  const { logIn } = useAuth();
 
   const onSubmit: SubmitHandler<LoginFormType> = async ({
     email,
     password,
   }) => {
-    const success = await logIn(email, password);
-    if (success) {
-      navigate('/');
-    } else {
+    try {
+      await logIn(email, password, () => navigate('/'));
+    } catch {
       setError('Email und/oder Passwort falsch!');
     }
   };

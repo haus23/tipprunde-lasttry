@@ -4,11 +4,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { UserIcon } from '@heroicons/react/outline';
 
+import { useAuth } from '@/common/hooks/use-auth';
 import { TextField } from '@/common/components/text-field/TextField';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { notify } from '@/common/components/notifications/Notifications';
-import { useUser } from '@/common/hooks/use-user';
 
 type ProfileFormType = {
   displayName: string;
@@ -16,7 +16,7 @@ type ProfileFormType = {
 };
 
 export const Profile = () => {
-  const { user, updateProfile } = useUser();
+  const { user, updateProfile } = useAuth();
   const [imageUrl, setImageUrl] = useState(user.photoURL);
   const [updatedAvatar, setAvatar] = useState<File>(null);
 

@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Notifications } from '../components/notifications/Notifications';
 import { SplashScreen } from '../components/splash-screen/SplashScreen';
-import { useAuth } from '../hooks/use-auth';
+import { useFirebaseAuth } from '../hooks/use-firebase-auth';
 
 import { darkModeState } from '../state/dark-mode-state';
 import { themeState } from '../state/theme-state';
@@ -15,7 +15,7 @@ export const AppContext = ({ children }: AppContextProps) => {
   //
   // Authentication
   //
-  const isAuthenticating = useAuth();
+  const isAuthenticating = useFirebaseAuth();
 
   //
   // Theme handling
