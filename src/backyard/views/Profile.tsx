@@ -2,20 +2,25 @@ import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { UserIcon } from '@heroicons/react/outline';
+
 import { TextField } from '@/common/components/text-field/TextField';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
-import { UserIcon } from '@heroicons/react/outline';
 import { notify } from '@/common/components/notifications/Notifications';
 import { useUser } from '@/common/hooks/use-user';
-import { User } from '@/api/firebase/auth';
+
+type ProfileFormType = {
+  displayName: string;
+  email: string;
+};
 
 export const Profile = () => {
   const { user, updateProfile } = useUser();
   const [imageUrl, setImageUrl] = useState(user.photoURL);
   const [updatedAvatar, setAvatar] = useState<File>(null);
 
-  const onSubmit: SubmitHandler<User> = async ({ displayName }) => {
+  const onSubmit: SubmitHandler<ProfileFormType> = async ({ displayName }) => {
     displayName = displayName.trim();
     notify(
       updateProfile({ displayName, avatar: updatedAvatar }),
@@ -23,7 +28,7 @@ export const Profile = () => {
     );
   };
 
-  const { register, handleSubmit } = useForm<User>({
+  const { register, handleSubmit } = useForm<ProfileFormType>({
     defaultValues: user,
   });
 
