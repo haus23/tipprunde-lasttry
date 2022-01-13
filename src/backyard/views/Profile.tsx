@@ -49,7 +49,7 @@ export const Profile = () => {
 
   return (
     <ContentPanel title={<div>Profil</div>}>
-      <div className="bg-white dark:bg-gray-900 py-8 px-4 border border-gray-300 dark:border-gray-600 shadow-md sm:rounded-lg sm:px-10 md:mx-auto md:w-full md:max-w-xl">
+      <div className="bg-white dark:bg-gray-800 py-8 px-4 border border-gray-300 dark:border-gray-600 shadow-md sm:rounded-lg sm:px-10 md:mx-auto md:w-full md:max-w-xl">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextField

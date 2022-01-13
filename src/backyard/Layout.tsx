@@ -1,7 +1,13 @@
 import { Fragment, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
-import { HomeIcon, MenuIcon, UserIcon, XIcon } from '@heroicons/react/outline';
+import {
+  FolderIcon,
+  HomeIcon,
+  MenuIcon,
+  UserIcon,
+  XIcon,
+} from '@heroicons/react/outline';
 
 import { useAuth } from '@/common/hooks/use-auth';
 
@@ -79,6 +85,14 @@ export const Layout = () => {
                     onClick={() => setSidebarOpen(false)}
                   >
                     Dashboard
+                  </SidebarLink>
+                  <SidebarLink
+                    to="./turnier"
+                    end
+                    icon={FolderIcon}
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    Turnier
                   </SidebarLink>
                 </nav>
               </div>

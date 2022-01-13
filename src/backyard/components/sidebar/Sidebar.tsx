@@ -1,6 +1,6 @@
 import { Logo } from '@/common/components/logo/Logo';
 import { useAuth } from '@/common/hooks/use-auth';
-import { HomeIcon, UserIcon } from '@heroicons/react/outline';
+import { FolderIcon, HomeIcon, UserIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { SidebarLink } from '../sidebar-link/SidebarLink';
 
@@ -20,6 +20,9 @@ export const Sidebar = () => {
           <nav className="mt-2 flex-1 px-2 space-y-1">
             <SidebarLink to="." icon={HomeIcon} end>
               Dashboard
+            </SidebarLink>
+            <SidebarLink to="./turnier" icon={FolderIcon} end>
+              Turnier
             </SidebarLink>
           </nav>
         </div>
