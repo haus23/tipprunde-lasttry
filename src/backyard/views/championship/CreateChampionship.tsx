@@ -3,13 +3,13 @@ import { Championship } from '@/api/model/championship';
 import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { TextField } from '@/common/components/text-field/TextField';
 import { Button } from '@/common/components/button/Button';
-import { useChampionships } from '@/api/hooks/use-championships';
 import { useSetRecoilState } from 'recoil';
 import { currentChampionshipState } from '@/backyard/state/current-championship-state';
 import { useNavigate } from 'react-router-dom';
+import { useChampionships } from '@/backyard/hooks/use-championships';
 
 export const CreateChampionship = () => {
-  const { championships, create } = useChampionships();
+  const { championships, add } = useChampionships();
   const setCurrentChampionship = useSetRecoilState(currentChampionshipState);
   const navigate = useNavigate();
 
@@ -39,7 +39,13 @@ export const CreateChampionship = () => {
   };
 
   const onSubmit: SubmitHandler<Championship> = async ({ id, title, nr }) => {
-    const championship = await create(id, title, nr);
+    const championship = await add({
+      id,
+      title,
+      nr,
+      published: false,
+      completed: false,
+    });
     setCurrentChampionship(championship);
     navigate('../turnier');
   };

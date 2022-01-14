@@ -1,7 +1,7 @@
-import { useCurrentChampionship } from '@/api/hooks/use-current-championship';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import { useCurrentChampionship } from './hooks/use-current-championship';
 import { Layout } from './Layout';
 import { currentChampionshipState } from './state/current-championship-state';
 import { CreateChampionship } from './views/championship/CreateChampionship';
@@ -15,7 +15,7 @@ export const Backyard = () => {
   const [currentChampionship, setCurrentChampionship] = useRecoilState(
     currentChampionshipState
   );
-  const championship = useCurrentChampionship(false);
+  const { championship } = useCurrentChampionship();
 
   useEffect(() => {
     if (!currentChampionship) {

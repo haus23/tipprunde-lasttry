@@ -25,7 +25,6 @@ const items = [
 
 export const Dashboard = () => {
   const championship = useRecoilValue(currentChampionshipState);
-
   return (
     <ContentPanel title="Hinterhof">
       <h2 className="text-lg font-semibold pb-4">

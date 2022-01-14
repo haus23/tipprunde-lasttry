@@ -1,22 +1,23 @@
 import { useRecoilValue } from 'recoil';
 
-import { useRounds } from '@/api/hooks/use-rounds';
 import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { currentChampionshipState } from '@/backyard/state/current-championship-state';
 import { Button } from '@/common/components/button/Button';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Round } from '@/api/model/round';
+import { useRounds } from '@/backyard/hooks/use-rounds';
 
 export const CreateRound = () => {
   const championship = useRecoilValue(currentChampionshipState);
-  const { rounds, create } = useRounds(championship);
+  const { rounds, add } = useRounds(championship);
 
   // Component State
   const [round, setRound] = useState<Round>();
 
-  const nextNr = rounds.length + 1;
+  const nextNr = useMemo(() => rounds && rounds.length + 1, [rounds]);
+
   const createRound = async () => {
-    const r = await create({ nr: nextNr, published: false, completed: false });
+    const r = await add({ nr: nextNr, published: false, completed: false });
     setRound(r);
   };
 
