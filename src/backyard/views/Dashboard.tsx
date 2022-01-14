@@ -12,12 +12,14 @@ const items = [
       'Starte eine komplett neue Liga-Halbserie oder eine EM bzw. WM',
     icon: FolderAddIcon,
     background: 'bg-pink-500',
+    route: './neues-turnier',
   },
   {
     title: 'Neue Runde',
     description: 'Lege eine neue (Monats-) Runde mit Spielansetzungen an',
     icon: CalendarIcon,
     background: 'bg-yellow-500',
+    route: './neue-runde',
   },
 ];
 
@@ -43,7 +45,7 @@ export const Dashboard = () => {
               </div>
               <div>
                 <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                  <Link to="./turnier/neu" className="focus:outline-none">
+                  <Link to={item.route} className="focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     {item.title}
                     <span aria-hidden="true"> &rarr;</span>

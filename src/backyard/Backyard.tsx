@@ -9,6 +9,7 @@ import { ViewChampionship } from './views/championship/ViewChampionship';
 
 import { Dashboard } from './views/Dashboard';
 import { Profile } from './views/Profile';
+import { CreateRound } from './views/round/CreateRound';
 
 export const Backyard = () => {
   const [currentChampionship, setCurrentChampionship] = useRecoilState(
@@ -22,14 +23,15 @@ export const Backyard = () => {
     }
   }, [championship, currentChampionship, setCurrentChampionship]);
 
-  return (
+  return currentChampionship ? (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path="turnier" element={<ViewChampionship />} />
-        <Route path="turnier/neu" element={<CreateChampionship />} />
+        <Route path="neues-turnier" element={<CreateChampionship />} />
+        <Route path="neue-runde" element={<CreateRound />} />
         <Route path="profil" element={<Profile />} />
       </Route>
     </Routes>
-  );
+  ) : null;
 };

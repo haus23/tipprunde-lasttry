@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   collection,
   doc,
+  DocumentReference,
   getDocs,
   onSnapshot,
   query,
@@ -29,9 +30,22 @@ export const useCollection = <T extends BaseModel>(
     [path, constraints]
   );
 
+  /**
+   * Adds an entity to the collection. Missing id will generate one.
+   *
+   * @param entity T
+   */
   const add = async (entity: T) => {
-    const ref = doc(db, path, entity.id).withConverter(converter<T>());
-    await setDoc(ref, entity);
+    let docRef: DocumentReference<T>;
+    if (entity.id) {
+      docRef = doc(db, path, entity.id).withConverter(converter<T>());
+      await setDoc(docRef, entity);
+    } else {
+      docRef = doc(collection(db, path)).withConverter(converter<T>());
+      await setDoc(docRef, entity);
+      entity.id = docRef.id;
+    }
+    return entity;
   };
 
   useEffect(() => {

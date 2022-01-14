@@ -6,7 +6,7 @@ export const ViewChampionship = () => {
   const championship = useRecoilValue(currentChampionshipState);
 
   return (
-    <ContentPanel title={championship.title}>
+    <ContentPanel title={championship?.title}>
       <div></div>
     </ContentPanel>
   );
