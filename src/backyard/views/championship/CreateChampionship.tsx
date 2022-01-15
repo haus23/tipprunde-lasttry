@@ -4,13 +4,13 @@ import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { TextField } from '@/common/components/text-field/TextField';
 import { Button } from '@/common/components/button/Button';
 import { useSetRecoilState } from 'recoil';
-import { currentChampionshipState } from '@/backyard/state/current-championship-state';
 import { useNavigate } from 'react-router-dom';
 import { useChampionships } from '@/backyard/hooks/use-championships';
+import { currentChampionshipQuery } from '@/backyard/state/current-championship';
 
 export const CreateChampionship = () => {
   const { championships, add } = useChampionships();
-  const setCurrentChampionship = useSetRecoilState(currentChampionshipState);
+  const setCurrentChampionship = useSetRecoilState(currentChampionshipQuery);
   const navigate = useNavigate();
 
   const {

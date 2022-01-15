@@ -1,6 +1,11 @@
 import { Logo } from '@/common/components/logo/Logo';
 import { useAuth } from '@/common/hooks/use-auth';
-import { FolderIcon, HomeIcon, UserIcon } from '@heroicons/react/outline';
+import {
+  CalendarIcon,
+  FolderIcon,
+  HomeIcon,
+  UserIcon,
+} from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { SidebarLink } from '../sidebar-link/SidebarLink';
 
@@ -23,6 +28,9 @@ export const Sidebar = () => {
             </SidebarLink>
             <SidebarLink to="./turnier" icon={FolderIcon} end>
               Turnier
+            </SidebarLink>
+            <SidebarLink to="./spiele" icon={CalendarIcon} end>
+              Spiele
             </SidebarLink>
           </nav>
         </div>

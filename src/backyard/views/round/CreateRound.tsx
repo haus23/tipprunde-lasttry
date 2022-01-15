@@ -1,14 +1,14 @@
 import { useRecoilValue } from 'recoil';
 
 import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
-import { currentChampionshipState } from '@/backyard/state/current-championship-state';
 import { Button } from '@/common/components/button/Button';
 import { useMemo, useState } from 'react';
 import { Round } from '@/api/model/round';
 import { useRounds } from '@/backyard/hooks/use-rounds';
+import { currentChampionshipQuery } from '@/backyard/state/current-championship';
 
 export const CreateRound = () => {
-  const championship = useRecoilValue(currentChampionshipState);
+  const championship = useRecoilValue(currentChampionshipQuery);
   const { rounds, add } = useRounds(championship);
 
   // Component State

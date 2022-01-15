@@ -3,7 +3,7 @@ import { CalendarIcon, FolderAddIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
-import { currentChampionshipState } from '../state/current-championship-state';
+import { currentChampionshipQuery } from '../state/current-championship';
 
 const items = [
   {
@@ -24,11 +24,12 @@ const items = [
 ];
 
 export const Dashboard = () => {
-  const championship = useRecoilValue(currentChampionshipState);
+  const championship = useRecoilValue(currentChampionshipQuery);
+
   return (
     <ContentPanel title="Hinterhof">
       <h2 className="text-lg font-semibold pb-4">
-        Turnier: {championship?.title}
+        Turnier: {championship.title}
       </h2>
       <ul role="list" className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {items.map((item, itemIdx) => (

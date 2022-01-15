@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 import {
+  CalendarIcon,
   FolderIcon,
   HomeIcon,
   MenuIcon,
@@ -93,6 +94,14 @@ export const Layout = () => {
                     onClick={() => setSidebarOpen(false)}
                   >
                     Turnier
+                  </SidebarLink>
+                  <SidebarLink
+                    to="./spiele"
+                    end
+                    icon={CalendarIcon}
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    Spiele
                   </SidebarLink>
                 </nav>
               </div>
