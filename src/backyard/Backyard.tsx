@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { useRecoilValueLoadable } from 'recoil';
+import { useCurrentChampionship } from './hooks/use-current-championship';
 import { Layout } from './Layout';
-import { currentChampionshipQuery } from './state/current-championship';
 import { CreateChampionship } from './views/championship/CreateChampionship';
 import { ViewChampionship } from './views/championship/ViewChampionship';
 
@@ -11,9 +10,9 @@ import { Profile } from './views/Profile';
 import { CreateRound } from './views/round/CreateRound';
 
 export const Backyard = () => {
-  const { state } = useRecoilValueLoadable(currentChampionshipQuery);
+  useCurrentChampionship();
 
-  return state === 'hasValue' ? (
+  return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />} />
@@ -24,5 +23,5 @@ export const Backyard = () => {
         <Route path="profil" element={<Profile />} />
       </Route>
     </Routes>
-  ) : null;
+  );
 };

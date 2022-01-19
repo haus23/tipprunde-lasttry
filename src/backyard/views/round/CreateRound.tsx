@@ -1,24 +1,24 @@
-import { useRecoilValue } from 'recoil';
-
 import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { useMemo, useState } from 'react';
 import { Round } from '@/api/model/round';
 import { useRounds } from '@/backyard/hooks/use-rounds';
-import { currentChampionshipQuery } from '@/backyard/state/current-championship';
+import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateRound = () => {
-  const championship = useRecoilValue(currentChampionshipQuery);
-  const { rounds, add } = useRounds(championship);
+  const { championship, rounds } = useCurrentChampionship();
+  const { add } = useRounds(championship);
+  const navigate = useNavigate();
 
   // Component State
-  const [round, setRound] = useState<Round>();
+  const [round] = useState<Round>();
 
   const nextNr = useMemo(() => rounds && rounds.length + 1, [rounds]);
 
   const createRound = async () => {
-    const r = await add({ nr: nextNr, published: false, completed: false });
-    setRound(r);
+    await add({ nr: nextNr, published: false, completed: false });
+    navigate('../spiele');
   };
 
   return (

@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { orderBy } from 'firebase/firestore';
+import { limit, orderBy } from 'firebase/firestore';
 
 import { getCollection } from '@/api/firebase/db';
 import { Championship } from '@/api/model/championship';
@@ -17,7 +17,8 @@ export const currentChampionshipQuery = selector<Championship>({
 
     const championships = await getCollection<Championship>(
       'championships',
-      orderBy('nr', 'desc')
+      orderBy('nr', 'desc'),
+      limit(1)
     );
 
     return championships.length ? championships[0] : null;

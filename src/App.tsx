@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Backyard } from './backyard/Backyard';
 import { RequireAuth } from './common/context/RequireAuth';
@@ -11,7 +12,9 @@ export const App = () => {
         path="/hinterhof/*"
         element={
           <RequireAuth>
-            <Backyard />
+            <Suspense fallback={null}>
+              <Backyard />
+            </Suspense>
           </RequireAuth>
         }
       />
