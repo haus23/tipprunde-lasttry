@@ -6,6 +6,7 @@ import { Button } from '@/common/components/button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
 import { useChampionships } from '@/backyard/hooks/use-championships';
+import { FormPanel } from '@/common/components/form-panel/FormPanel';
 
 export const CreateChampionship = () => {
   const { championships, add } = useChampionships();
@@ -51,7 +52,7 @@ export const CreateChampionship = () => {
 
   return (
     <ContentPanel title="Neues Turnier">
-      <div className="bg-white dark:bg-gray-800 py-8 px-4 border border-gray-300 dark:border-gray-600 shadow-md sm:rounded-lg sm:px-10 md:mx-auto md:w-full md:max-w-xl">
+      <FormPanel>
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextField
@@ -106,7 +107,7 @@ export const CreateChampionship = () => {
             </Button>
           </div>
         </form>
-      </div>
+      </FormPanel>
     </ContentPanel>
   );
 };
