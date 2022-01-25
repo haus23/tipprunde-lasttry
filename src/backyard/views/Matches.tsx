@@ -1,8 +1,8 @@
 import { ContentPanel } from '../components/content-panel/ContentPanel';
-import { useCurrentChampionship } from '../hooks/use-current-championship';
+import { useRounds } from '../hooks/use-rounds';
 
 export const Matches = () => {
-  const { rounds } = useCurrentChampionship();
+  const { rounds } = useRounds();
 
   console.log(rounds);
   return (

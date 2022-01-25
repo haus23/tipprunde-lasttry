@@ -4,11 +4,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { UserIcon } from '@heroicons/react/outline';
 
-import { useAuth } from '@/common/hooks/use-auth';
 import { TextField } from '@/common/components/text-field/TextField';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { notify } from '@/common/components/notifications/Notifications';
+import { useAuth } from '@/common/hooks/use-auth';
 
 type ProfileFormType = {
   displayName: string;
@@ -16,16 +16,13 @@ type ProfileFormType = {
 };
 
 export const Profile = () => {
-  const { user, updateProfile } = useAuth();
+  const { user, updateUser } = useAuth();
   const [imageUrl, setImageUrl] = useState(user.photoURL);
-  const [updatedAvatar, setAvatar] = useState<File>(null);
+  const [avatar, setAvatar] = useState<File>(null);
 
   const onSubmit: SubmitHandler<ProfileFormType> = async ({ displayName }) => {
     displayName = displayName.trim();
-    notify(
-      updateProfile({ displayName, avatar: updatedAvatar }),
-      'Profil erfolgreich geändert.'
-    );
+    notify(updateUser(displayName, avatar), 'Profil erfolgreich geändert.');
   };
 
   const { register, handleSubmit } = useForm<ProfileFormType>({

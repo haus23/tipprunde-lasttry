@@ -2,13 +2,11 @@ import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { useMemo, useState } from 'react';
 import { Round } from '@/api/model/round';
-import { useRounds } from '@/backyard/hooks/use-rounds';
-import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
 import { useNavigate } from 'react-router-dom';
+import { useRounds } from '@/backyard/hooks/use-rounds';
 
 export const CreateRound = () => {
-  const { championship, rounds } = useCurrentChampionship();
-  const { add } = useRounds(championship);
+  const { rounds, add } = useRounds();
   const navigate = useNavigate();
 
   // Component State

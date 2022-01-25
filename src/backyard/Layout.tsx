@@ -10,13 +10,12 @@ import {
   XIcon,
 } from '@heroicons/react/outline';
 
-import { useAuth } from '@/common/hooks/use-auth';
-
 import { Logo } from '@/common/components/logo/Logo';
 import { ThemeSwitch } from '@/common/components/theme-switch/ThemeSwitch';
 import { classNames } from '@/common/helper/class-names';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { SidebarLink } from './components/sidebar-link/SidebarLink';
+import { useAuth } from '@/common/hooks/use-auth';
 
 export const Layout = () => {
   const { user } = useAuth();

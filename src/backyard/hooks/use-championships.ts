@@ -1,17 +1,11 @@
-import { useRef } from 'react';
-import { orderBy } from 'firebase/firestore';
-import { useCollectionOnce } from '@/api/hooks/use-collection-once';
-import { Championship } from '@/api/model/championship';
+import { add, championshipDocs } from '@/api/model/championship-repository';
+import { useRecoilValue } from 'recoil';
 
 export const useChampionships = () => {
-  const constraints = useRef([orderBy('nr', 'desc')]);
+  const championships = useRecoilValue(championshipDocs);
 
-  const {
-    values: championships,
-    loading,
-    error,
+  return {
+    championships,
     add,
-  } = useCollectionOnce<Championship>('championships', constraints.current);
-
-  return { championships, loading, error, add };
+  };
 };

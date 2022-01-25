@@ -1,20 +1,17 @@
-import { orderBy } from 'firebase/firestore';
-import { useRef } from 'react';
-
-import { useCollectionOnce } from '@/api/hooks/use-collection-once';
-import { Championship } from '@/api/model/championship';
 import { Round } from '@/api/model/round';
+import {
+  add as addRound,
+  roundsByChampionship,
+} from '@/api/model/round-repository';
+import { useRecoilValue } from 'recoil';
+import { useCurrentChampionship } from './use-current-championship';
 
-export const useRounds = (championship: Championship) => {
-  const constraints = useRef([orderBy('nr', 'asc')]);
-
-  const { values: rounds, ...rest } = useCollectionOnce<Round>(
-    `championships/${championship.id}/rounds`,
-    constraints.current
-  );
+export const useRounds = () => {
+  const { championship } = useCurrentChampionship();
+  const rounds = useRecoilValue(roundsByChampionship(championship.id));
 
   return {
     rounds,
-    ...rest,
+    add: (round: Round) => addRound(championship.id, round),
   };
 };

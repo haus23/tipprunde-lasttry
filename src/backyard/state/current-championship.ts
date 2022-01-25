@@ -1,8 +1,6 @@
 import { atom, selector } from 'recoil';
-import { limit, orderBy } from 'firebase/firestore';
-
-import { getCollection } from '@/api/firebase/db';
 import { Championship } from '@/api/model/championship';
+import { championshipDocs } from '@/api/model/championship-repository';
 
 export const currentChampionshipState = atom<Championship>({
   key: 'backyard-currentChampionship-state',
@@ -15,12 +13,7 @@ export const currentChampionshipQuery = selector<Championship>({
     const current = get(currentChampionshipState);
     if (current) return current;
 
-    const championships = await getCollection<Championship>(
-      'championships',
-      orderBy('nr', 'desc'),
-      limit(1)
-    );
-
+    const championships = get(championshipDocs);
     return championships.length ? championships[0] : null;
   },
   set: ({ set }, championship) => set(currentChampionshipState, championship),

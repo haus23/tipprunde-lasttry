@@ -1,14 +1,10 @@
 import { Transition } from '@headlessui/react';
 import { Logo } from '../logo/Logo';
 
-export type SplashScreenProps = {
-  show?: boolean;
-};
-
-export const SplashScreen = ({ show = true }: SplashScreenProps) => {
+export const SplashScreen = () => {
   return (
     <Transition
-      show={show}
+      show={true}
       appear={true}
       enter="transition-opacity duration-500"
       enterFrom="opacity-0"

@@ -1,8 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Notifications } from '../components/notifications/Notifications';
-import { SplashScreen } from '../components/splash-screen/SplashScreen';
-import { useFirebaseAuth } from '../hooks/use-firebase-auth';
 
 import { darkModeState } from '../state/dark-mode-state';
 import { themeState } from '../state/theme-state';
@@ -12,11 +10,6 @@ export type AppContextProps = {
 };
 
 export const AppContext = ({ children }: AppContextProps) => {
-  //
-  // Authentication
-  //
-  const isAuthenticating = useFirebaseAuth();
-
   //
   // Theme handling
   //
@@ -48,9 +41,8 @@ export const AppContext = ({ children }: AppContextProps) => {
 
   return (
     <>
-      <SplashScreen show={isAuthenticating} />
       <Notifications />
-      {isAuthenticating ? undefined : children}
+      {children}
     </>
   );
 };

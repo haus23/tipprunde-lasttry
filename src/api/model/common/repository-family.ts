@@ -1,8 +1,9 @@
-import { converter, db } from '@/api/firebase/db';
-import { collection, onSnapshot, query } from 'firebase/firestore';
 import { AtomEffect, atomFamily } from 'recoil';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { addEntity, db } from '@/api/firebase/db';
+import { converter } from './converter';
 
-export const syncedResourceState = <T>(
+export const repositoryFamily = <T>(
   key: string,
   pathBuilder: (param: string) => string
 ) => {
@@ -12,7 +13,7 @@ export const syncedResourceState = <T>(
     resolveInitialData = resolve;
   });
 
-  const syncResourceEffect: (path: string) => AtomEffect<T[]> =
+  const syncResourceEffect: (param: string) => AtomEffect<T[]> =
     (param) =>
     ({ setSelf }) => {
       const q = query(
@@ -34,9 +35,13 @@ export const syncedResourceState = <T>(
       };
     };
 
-  return atomFamily<T[], string>({
-    key,
-    default: initialData,
-    effects_UNSTABLE: (param) => [syncResourceEffect(param)],
-  });
+  return {
+    docs: atomFamily<T[], string>({
+      key,
+      default: initialData,
+      effects_UNSTABLE: (param) => [syncResourceEffect(param)],
+    }),
+
+    add: (param: string, doc: T) => addEntity(pathBuilder(param), doc),
+  };
 };

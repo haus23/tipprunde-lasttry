@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '@/common/hooks/use-auth';
 import { Button } from '@/common/components/button/Button';
+import { useAppState } from '@/common/hooks/use-app-state';
 
 export const Home = () => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user } = useAppState();
 
+  const navigate = useNavigate();
   return (
     <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow-md flex flex-col gap-y-4">
       <h2 className="px-4 text-3xl font-semibold">Haus23 Tipprunde</h2>

@@ -1,12 +1,12 @@
 import {
   collection,
+  doc,
   DocumentData,
+  DocumentReference,
   FirestoreDataConverter,
-  getDocs,
   getFirestore,
   PartialWithFieldValue,
-  query,
-  QueryConstraint,
+  setDoc,
 } from 'firebase/firestore';
 
 import { app } from './app';
@@ -31,12 +31,18 @@ export const converter = <
     } as T),
 });
 
-export const getCollection = async <T>(
+export const addEntity = async <T extends BaseModel>(
   path: string,
-  ...constraints: QueryConstraint[]
+  entity: T
 ) => {
-  const snapshot = await getDocs(
-    query(collection(db, path).withConverter(converter<T>()), ...constraints)
-  );
-  return snapshot.docs.map((doc) => doc.data());
+  let docRef: DocumentReference<T>;
+  if (entity.id) {
+    docRef = doc(db, path, entity.id).withConverter(converter<T>());
+    await setDoc(docRef, entity);
+  } else {
+    docRef = doc(collection(db, path)).withConverter(converter<T>());
+    await setDoc(docRef, entity);
+    entity.id = docRef.id;
+  }
+  return entity;
 };
