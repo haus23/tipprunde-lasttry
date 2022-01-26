@@ -1,3 +1,4 @@
+import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
 import { Logo } from '@/common/components/logo/Logo';
 import { useAuth } from '@/common/hooks/use-auth';
 import {
@@ -11,6 +12,7 @@ import { SidebarLink } from '../sidebar-link/SidebarLink';
 
 export const Sidebar = () => {
   const { user } = useAuth();
+  const { championship } = useCurrentChampionship();
 
   return (
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
@@ -26,12 +28,16 @@ export const Sidebar = () => {
             <SidebarLink to="." icon={HomeIcon} end>
               Dashboard
             </SidebarLink>
-            <SidebarLink to="./turnier" icon={FolderIcon} end>
-              Turnier
-            </SidebarLink>
-            <SidebarLink to="./spiele" icon={CalendarIcon} end>
-              Spiele
-            </SidebarLink>
+            {championship && (
+              <>
+                <SidebarLink to="./turnier" icon={FolderIcon} end>
+                  Turnier
+                </SidebarLink>
+                <SidebarLink to="./spiele" icon={CalendarIcon} end>
+                  Spiele
+                </SidebarLink>
+              </>
+            )}
           </nav>
         </div>
         <div className="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 p-4">

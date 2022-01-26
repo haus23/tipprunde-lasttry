@@ -6,3 +6,4 @@ dist/
 
 # Sensible data
 .env.local
+.env.production.local

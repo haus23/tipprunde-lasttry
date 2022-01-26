@@ -27,36 +27,55 @@ export const Dashboard = () => {
 
   return (
     <ContentPanel title="Hinterhof">
-      <h2 className="text-lg font-semibold pb-4">
-        Turnier: {championship.title}
-      </h2>
+      {championship !== null && (
+        <h2 className="text-lg font-semibold pb-4">
+          Turnier: {championship.title}
+        </h2>
+      )}
+
       <ul role="list" className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {items.map((item, itemIdx) => (
-          <li key={itemIdx} className="flow-root">
-            <div className="relative -m-2 p-2 flex items-center space-x-4 rounded-xl hover:bg-white dark:hover:bg-gray-800 focus-within:ring-2 focus-within:ring-indigo-500">
+        {items
+          .filter((item, itemIdx) => itemIdx === 0 || championship !== null)
+          .map((item, itemIdx) => (
+            <li
+              key={itemIdx}
+              className={
+                championship == null
+                  ? 'col-span-2 w-full max-w-md mx-auto mt-16'
+                  : ''
+              }
+            >
               <div
                 className={classNames(
-                  item.background,
-                  'flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-lg'
+                  'relative -m-2 p-2 flex items-center space-x-4 rounded-xl hover:bg-white dark:hover:bg-gray-800 focus-within:ring-2 focus-within:ring-indigo-500'
                 )}
               >
-                <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                <div
+                  className={classNames(
+                    item.background,
+                    'flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-lg'
+                  )}
+                >
+                  <item.icon
+                    className="h-6 w-6 text-white"
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                    <Link to={item.route} className="focus:outline-none">
+                      <span className="absolute inset-0" aria-hidden="true" />
+                      {item.title}
+                      <span aria-hidden="true"> &rarr;</span>
+                    </Link>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                  <Link to={item.route} className="focus:outline-none">
-                    <span className="absolute inset-0" aria-hidden="true" />
-                    {item.title}
-                    <span aria-hidden="true"> &rarr;</span>
-                  </Link>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))}
       </ul>
     </ContentPanel>
   );
