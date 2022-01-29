@@ -52,7 +52,7 @@ export const CreateChampionship = () => {
 
   return (
     <ContentPanel title="Neues Turnier">
-      <FormPanel>
+      <FormPanel className="max-w-2xl">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextField

@@ -1,9 +1,10 @@
+import { useRef, useState } from 'react';
 import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
-import { useRef, useState } from 'react';
 import { Round } from '@/api/model/round';
 import { useRounds } from '@/backyard/hooks/use-rounds';
 import { FormPanel } from '@/common/components/form-panel/FormPanel';
+import { MatchForm } from '@/backyard/components/forms/match-form';
 
 export const CreateRound = () => {
   const { rounds, add } = useRounds();
@@ -24,9 +25,9 @@ export const CreateRound = () => {
     <ContentPanel title={'Neue Runde ' + (round?.nr || '')}>
       <div className="flex items-center gap-x-8 pb-4">
         {round ? (
-          <h2 className="text-lg font-semibold">Runde {round.nr}</h2>
+          <MatchForm />
         ) : (
-          <FormPanel className="flex items-center justify-between">
+          <FormPanel className="flex items-center justify-between max-w-2xl">
             <h2 className="text-lg font-semibold">
               Neue Runde {nextNr.current}
             </h2>
