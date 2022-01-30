@@ -41,7 +41,7 @@ export const Dashboard = () => {
               key={itemIdx}
               className={
                 championship == null
-                  ? 'col-span-2 w-full max-w-md mx-auto mt-16'
+                  ? 'col-span-2 w-full max-w-md mx-auto sm:mt-16'
                   : ''
               }
             >
