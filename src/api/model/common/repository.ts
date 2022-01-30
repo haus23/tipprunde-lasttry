@@ -43,7 +43,7 @@ export const repository = <T>(
     docs: atom<T[]>({
       key,
       default: initialData,
-      effects_UNSTABLE: [syncResourceEffect],
+      effects: [syncResourceEffect],
     }),
 
     add: (doc: T) => addEntity(path, doc),

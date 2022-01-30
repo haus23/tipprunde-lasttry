@@ -39,7 +39,7 @@ export const repositoryFamily = <T>(
     docs: atomFamily<T[], string>({
       key,
       default: initialData,
-      effects_UNSTABLE: (param) => [syncResourceEffect(param)],
+      effects: (param) => [syncResourceEffect(param)],
     }),
 
     add: (param: string, doc: T) => addEntity(pathBuilder(param), doc),
