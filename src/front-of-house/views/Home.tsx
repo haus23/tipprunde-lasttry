@@ -20,7 +20,7 @@ export const Home = () => {
             <Button
               primary
               onClick={() => navigate('hinterhof')}
-              className="w-32"
+              className="w-40"
             >
               Zum Hinterhof
             </Button>
