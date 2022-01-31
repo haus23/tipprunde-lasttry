@@ -22,25 +22,25 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             style={{ display: labelHidden ? 'none' : undefined }}
             className={classNames(
               'block text-sm font-medium text-gray-700 dark:text-gray-200',
-              hasError ? 'dark:text-red-300' : ''
+              hasError ? 'text-red-500 dark:text-red-500' : ''
             )}
           >
             {label}
           </span>
-          <div className="mt-1 relative">
+          <div className="relative mt-1">
             <input
               type="text"
               ref={ref}
               {...props}
               className={classNames(
-                'mt-2 shadow-sm block w-full sm:text-sm rounded-md dark:bg-gray-800 disabled:bg-gray-100 dark:disabled:bg-gray-700',
+                'block w-full rounded-md shadow-sm disabled:bg-gray-100 dark:bg-gray-800 dark:disabled:bg-gray-700 sm:text-sm',
                 hasError
-                  ? 'pr-10 dark:border-2 border-red-300 dark:border-red-600 text-red-900 dark:text-red-500 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                  : 'border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500'
+                  ? 'border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 dark:border-2 dark:border-red-600 dark:text-red-500'
+                  : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600'
               )}
             />
             {hasError && (
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                 <ExclamationCircleIcon
                   data-testid="errorIcon"
                   className="h-5 w-5 text-red-500"
@@ -51,7 +51,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           </div>
         </label>
         {errorMsg && (
-          <p data-testid="errorMsg" className="mt-2 text-sm text-red-600">
+          <p data-testid="errorMsg" className="mt-2 text-sm text-red-500">
             {errorMsg}
           </p>
         )}
