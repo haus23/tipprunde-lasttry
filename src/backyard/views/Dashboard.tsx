@@ -3,6 +3,7 @@ import { CalendarIcon, FolderAddIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { useCurrentChampionship } from '../hooks/use-current-championship';
+import {Championship} from "@/api/model/championship";
 
 const items = [
   {
@@ -12,6 +13,7 @@ const items = [
     icon: FolderAddIcon,
     background: 'bg-pink-500',
     route: './neues-turnier',
+    visible: () => true
   },
   {
     title: 'Neue Runde',
@@ -19,6 +21,7 @@ const items = [
     icon: CalendarIcon,
     background: 'bg-yellow-500',
     route: './neue-runde',
+    visible: (championship: Championship) => championship !== null
   },
 ];
 
@@ -35,7 +38,7 @@ export const Dashboard = () => {
 
       <ul role="list" className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {items
-          .filter((item, itemIdx) => itemIdx === 0 || championship !== null)
+          .filter((item) => item.visible(championship))
           .map((item, itemIdx) => (
             <li
               key={itemIdx}
