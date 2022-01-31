@@ -130,7 +130,7 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
                         className={classNames(
                           highlightedIndex === index
                             ? 'text-white'
-                            : 'text-indigo-700',
+                            : 'text-indigo-700 dark:text-indigo-400',
                           'absolute inset-y-0 left-0 flex items-center pl-1.5'
                         )}
                       >
