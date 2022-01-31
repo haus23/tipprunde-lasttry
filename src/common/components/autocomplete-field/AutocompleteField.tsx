@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCombobox } from 'downshift';
 import { classNames } from '@/common/helper/class-names';
 import {
@@ -8,18 +8,22 @@ import {
 } from '@heroicons/react/outline';
 import { DisplayableBaseModel } from '@/api/model/common/base-model';
 
-export type AutocompleteFieldProps<T> = ComponentPropsWithoutRef<'input'> & {
+export type AutocompleteFieldProps<T> = {
   label: string;
   items: T[];
+  initialSelectedItem: T;
+  onChange: (item: T) => void;
   errorMsg?: string;
+  className?: string;
 };
 
 export const AutocompleteField = <T extends DisplayableBaseModel>({
   label,
   items,
+  initialSelectedItem,
   errorMsg,
   className,
-  ...props
+  onChange,
 }: AutocompleteFieldProps<T>) => {
   const [inputItems, setInputItems] = useState(items);
 
@@ -38,9 +42,14 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
     getComboboxProps,
     getToggleButtonProps,
     highlightedIndex,
-    openMenu,
     selectedItem,
-  } = useCombobox({ items: inputItems, itemToString: (item) => item.name });
+    openMenu,
+  } = useCombobox({
+    items: inputItems,
+    initialSelectedItem,
+    itemToString: (item) => item.name,
+    onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem),
+  });
 
   return (
     <div className={className}>
@@ -64,7 +73,6 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
                   ? 'border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 dark:border-2 dark:border-red-600 dark:text-red-500'
                   : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600'
               )}
-              {...props}
               {...getInputProps({
                 onFocus: () => {
                   if (!isOpen) {
