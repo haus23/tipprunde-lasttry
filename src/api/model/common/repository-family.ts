@@ -16,6 +16,10 @@ export const repositoryFamily = <T>(
   const syncResourceEffect: (param: string) => AtomEffect<T[]> =
     (param) =>
     ({ setSelf }) => {
+      if (typeof param === 'undefined') {
+        setSelf(null);
+      }
+
       const q = query(
         collection(db, pathBuilder(param)).withConverter(converter<T>())
       );

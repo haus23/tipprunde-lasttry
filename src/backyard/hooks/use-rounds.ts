@@ -8,7 +8,7 @@ import { useCurrentChampionship } from './use-current-championship';
 
 export const useRounds = () => {
   const { championship } = useCurrentChampionship();
-  const rounds = useRecoilValue(roundsByChampionship(championship.id));
+  const rounds = useRecoilValue(roundsByChampionship(championship?.id));
 
   return {
     rounds,
