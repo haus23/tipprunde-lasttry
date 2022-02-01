@@ -7,6 +7,7 @@ import { Profile } from './views/Profile';
 import { CreateChampionship } from './views/championship/CreateChampionship';
 import { ViewChampionship } from './views/championship/ViewChampionship';
 import { CreateRound } from './views/round/CreateRound';
+import { Sample } from '@/backyard/views/sample';
 
 export const Backyard = () => {
   return (
@@ -18,6 +19,7 @@ export const Backyard = () => {
         <Route path="neues-turnier" element={<CreateChampionship />} />
         <Route path="neue-runde" element={<CreateRound />} />
         <Route path="profil" element={<Profile />} />
+        <Route path="sample" element={<Sample />} />
       </Route>
     </Routes>
   );

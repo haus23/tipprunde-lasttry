@@ -15,20 +15,33 @@ export const db = getFirestore(app);
 
 export interface BaseModel {
   id?: string;
+  path?: string;
 }
 
 export const converter = <
   T extends BaseModel
 >(): FirestoreDataConverter<T> => ({
   toFirestore: (modelObject: PartialWithFieldValue<T>): DocumentData => {
-    const { id, ...doc } = modelObject;
+    const { id, path, ...doc } = modelObject;
     return doc;
   },
-  fromFirestore: (snapshot) =>
-    ({
+  fromFirestore: (snapshot) => {
+    const data = snapshot.data();
+
+    const modelObject = {
       id: snapshot.id,
-      ...snapshot.data(),
-    } as T),
+      path: snapshot.ref.path,
+    };
+
+    for (const dataKey in data) {
+      if (data[dataKey].path) {
+        modelObject[dataKey] = data[dataKey].path;
+      } else {
+        modelObject[dataKey] = data[dataKey];
+      }
+    }
+    return modelObject as T;
+  },
 });
 
 export const addEntity = async <T extends BaseModel>(
