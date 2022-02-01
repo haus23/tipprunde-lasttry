@@ -46,6 +46,13 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
     openMenu,
   } = useCombobox({
     items: inputItems,
+    onInputValueChange: ({ inputValue }) => {
+      setInputItems(
+        items.filter((item) =>
+          item.name.toLowerCase().includes(inputValue.toLowerCase())
+        )
+      );
+    },
     initialSelectedItem,
     itemToString: (item) => item.name,
     onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem),
