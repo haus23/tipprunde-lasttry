@@ -18,7 +18,7 @@ export const Matches = () => {
         </div>
       }
     >
-      <h2 className="text-lg font-semibold mb-4">Runde {rounds[0].nr}</h2>
+      <h2 className="mb-4 text-lg font-semibold">Runde {rounds[0].nr}</h2>
       <MatchForm />
     </ContentPanel>
   );

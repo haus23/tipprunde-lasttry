@@ -27,7 +27,7 @@ export const Layout = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75 dark:bg-gray-700 dark:bg-opacity-75" />
           </Transition.Child>
           <Transition.Child
             as={Fragment}

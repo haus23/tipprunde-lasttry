@@ -51,7 +51,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           </div>
         </label>
         {errorMsg && (
-          <p data-testid="errorMsg" className="mt-2 text-sm text-red-500">
+          <p data-testid="errorMsg" className="mt-2 text-sm text-red-300">
             {errorMsg}
           </p>
         )}
