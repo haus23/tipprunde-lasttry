@@ -10,8 +10,8 @@ import { LeagueForm } from '@/backyard/components/forms/league-form';
 import { ModalDialog } from '@/backyard/components/modal-dialog/ModalDialog';
 import { useState } from 'react';
 import { useLeagues } from '@/backyard/hooks/use-leagues';
-
-const teams: Team[] = [];
+import { useTeams } from '@/backyard/hooks/use-teams';
+import { TeamForm } from '@/backyard/components/forms/team-form';
 
 type MatchFormType = {
   date: string;
@@ -26,8 +26,9 @@ export type MatchFormProps = {
 
 export const MatchForm = () => {
   const { addLeague, leagues } = useLeagues();
-
+  const { addTeam, teams } = useTeams();
   const [leagueDialogOpen, setLeagueDialogOpen] = useState(false);
+  const [teamDialogOpen, setTeamDialogOpen] = useState(false);
 
   const onSubmit: SubmitHandler<MatchFormType> = async (data) => {
     console.log(data);
@@ -69,7 +70,7 @@ export const MatchForm = () => {
                 items={teams}
                 initialSelectedItem={value}
                 onChange={onChange}
-                onAdd={() => setLeagueDialogOpen(true)}
+                onAdd={() => setTeamDialogOpen(true)}
               />
             )}
           />
@@ -83,7 +84,7 @@ export const MatchForm = () => {
                 items={teams}
                 initialSelectedItem={value}
                 onChange={onChange}
-                onAdd={() => setLeagueDialogOpen(true)}
+                onAdd={() => setTeamDialogOpen(true)}
               />
             )}
           />
@@ -104,6 +105,18 @@ export const MatchForm = () => {
             await addLeague(league);
           }}
           onCancel={() => setLeagueDialogOpen(false)}
+        />
+      </ModalDialog>
+      <ModalDialog
+        open={teamDialogOpen}
+        onClose={() => setTeamDialogOpen(false)}
+      >
+        <TeamForm
+          onSave={async (team) => {
+            setTeamDialogOpen(false);
+            await addTeam(team);
+          }}
+          onCancel={() => setTeamDialogOpen(false)}
         />
       </ModalDialog>
     </>
