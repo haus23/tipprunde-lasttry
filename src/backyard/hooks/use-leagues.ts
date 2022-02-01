@@ -1,11 +1,21 @@
-import { useRecoilValue } from 'recoil';
-import { add as addLeague, leagueDocs } from '@/api/model/league-repository';
+import { atom, useRecoilValue } from 'recoil';
+
+import { League } from '@/api/model/league';
+import { supabase } from '@/api/supabase';
+
+const leaguesState = atom<League[]>({
+  key: 'leagues',
+  default: (await supabase.from<League>('leagues').select()).data,
+});
 
 export const useLeagues = () => {
-  const leagues = useRecoilValue(leagueDocs);
+  const leagues = useRecoilValue(leaguesState);
 
   return {
     leagues,
-    addLeague,
+    addLeague: async (league: League) => {
+      const data = (await supabase.from<League>('leagues').insert(league)).data;
+      console.log('Created', data);
+    },
   };
 };

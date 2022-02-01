@@ -1,11 +1,21 @@
-import { useRecoilValue } from 'recoil';
-import { add as addTeam, teamDocs } from '@/api/model/team-repository';
+import { atom, useRecoilValue } from 'recoil';
+
+import { Team } from '@/api/model/team';
+import { supabase } from '@/api/supabase';
+
+const teamsState = atom<Team[]>({
+  key: 'teams',
+  default: (await supabase.from<Team>('teams').select()).data,
+});
 
 export const useTeams = () => {
-  const teams = useRecoilValue(teamDocs);
+  const teams = useRecoilValue(teamsState);
 
   return {
     teams,
-    addTeam,
+    addTeam: async (team: Team) => {
+      const data = (await supabase.from<Team>('teams').insert(team)).data;
+      console.log('Created', data);
+    },
   };
 };

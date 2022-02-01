@@ -15,14 +15,13 @@ export const db = getFirestore(app);
 
 export interface BaseModel {
   id?: string;
-  path?: string;
 }
 
 export const converter = <
   T extends BaseModel
 >(): FirestoreDataConverter<T> => ({
   toFirestore: (modelObject: PartialWithFieldValue<T>): DocumentData => {
-    const { id, path, ...doc } = modelObject;
+    const { id, ...doc } = modelObject;
     return doc;
   },
   fromFirestore: (snapshot) => {
@@ -30,7 +29,6 @@ export const converter = <
 
     const modelObject = {
       id: snapshot.id,
-      path: snapshot.ref.path,
     };
 
     for (const dataKey in data) {
