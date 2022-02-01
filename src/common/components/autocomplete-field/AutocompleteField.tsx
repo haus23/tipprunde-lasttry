@@ -13,6 +13,7 @@ export type AutocompleteFieldProps<T> = {
   items: T[];
   initialSelectedItem: T;
   onChange: (item: T) => void;
+  onAdd: () => void;
   errorMsg?: string;
   className?: string;
 };
@@ -24,6 +25,7 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
   errorMsg,
   className,
   onChange,
+  onAdd,
 }: AutocompleteFieldProps<T>) => {
   const [inputItems, setInputItems] = useState(items);
 
@@ -110,6 +112,7 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
             )}
           </div>
           <button
+            onClick={onAdd}
             type="button"
             className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 focus-within:z-10 hover:bg-gray-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-700"
           >
