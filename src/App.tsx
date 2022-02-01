@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Backyard } from './backyard/Backyard';
-import { RequireAuth } from './common/context/RequireAuth';
+import { RequireAuth } from './lib/components/RequireAuth';
 import { FrontOfHouse } from './front-of-house/FrontOfHouse';
 
 export const App = () => {

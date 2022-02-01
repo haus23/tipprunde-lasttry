@@ -1,4 +1,4 @@
-import { userState } from '@/api/auth/auth-state';
+import { userState } from '@/api/fb-auth/auth-state';
 import { championshipDocs } from '@/api/model/championship-repository';
 import { useRecoilValue } from 'recoil';
 

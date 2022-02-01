@@ -1,7 +1,12 @@
-import { signIn, signOut, userState, updateUser } from '@/api/auth/auth-state';
+import {
+  signIn,
+  signOut,
+  userState,
+  updateUser,
+} from '@/api/fb-auth/auth-state';
 import { useRecoilValue } from 'recoil';
 
-export const useAuth = () => {
+export const useFbAuth = () => {
   const user = useRecoilValue(userState);
 
   const logIn = async (

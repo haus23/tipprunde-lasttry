@@ -1,6 +1,5 @@
 import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
 import { Logo } from '@/common/components/logo/Logo';
-import { useAuth } from '@/common/hooks/use-auth';
 import {
   CalendarIcon,
   FolderIcon,
@@ -13,6 +12,7 @@ import { useRounds } from '@/backyard/hooks/use-rounds';
 import { ElementType } from 'react';
 import { Championship } from '@/api/model/championship';
 import { Round } from '@/api/model/round';
+import { useProfile } from '@/lib/hooks/use-profile';
 
 const sidebarLinks: {
   to: string;
@@ -46,7 +46,7 @@ export type SidebarProps = {
 };
 
 export const Sidebar = ({ onNavAction }: SidebarProps) => {
-  const { user } = useAuth();
+  const { profile } = useProfile();
   const { championship } = useCurrentChampionship();
   const { rounds } = useRounds();
 
@@ -79,10 +79,10 @@ export const Sidebar = ({ onNavAction }: SidebarProps) => {
         <div className="block w-full">
           <div className="flex items-center">
             <div>
-              {user.photoURL ? (
+              {profile.avatarUrl ? (
                 <img
                   className="inline-block h-9 w-9 rounded-full"
-                  src={user.photoURL}
+                  src={profile.avatarUrl}
                   alt="User Avatar"
                 />
               ) : (
@@ -90,8 +90,8 @@ export const Sidebar = ({ onNavAction }: SidebarProps) => {
               )}
             </div>
             <div className="ml-3 grow">
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                {user.displayName ? user.displayName : user.email}
+              <p className="w-44 overflow-clip overflow-ellipsis text-sm font-medium text-gray-700 dark:text-gray-200">
+                {profile.name ? profile.name : profile.email}
               </p>
               <div className="flex gap-x-1 text-xs font-medium text-gray-500 dark:text-gray-400">
                 <Link

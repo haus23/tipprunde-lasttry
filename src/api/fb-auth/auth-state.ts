@@ -46,7 +46,7 @@ const syncAuthEffect: AtomEffect<User> = ({ setSelf }) => {
 };
 
 const userState = atom<User>({
-  key: 'authState',
+  key: 'fbAuthState',
   default: initialData,
   effects_UNSTABLE: [syncAuthEffect],
 });

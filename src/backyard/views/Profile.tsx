@@ -8,7 +8,7 @@ import { TextField } from '@/common/components/text-field/TextField';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { notify } from '@/common/components/notifications/Notifications';
-import { useAuth } from '@/common/hooks/use-auth';
+import { useFbAuth } from '@/common/hooks/use-fb-auth';
 
 type ProfileFormType = {
   displayName: string;
@@ -16,7 +16,7 @@ type ProfileFormType = {
 };
 
 export const Profile = () => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser } = useFbAuth();
   const [imageUrl, setImageUrl] = useState(user.photoURL);
   const [avatar, setAvatar] = useState<File>(null);
 
@@ -46,7 +46,7 @@ export const Profile = () => {
 
   return (
     <ContentPanel title={<div>Profil</div>}>
-      <div className="bg-white dark:bg-gray-800 py-8 px-4 border border-gray-300 dark:border-gray-600 shadow-md sm:rounded-lg sm:px-10 md:mx-auto md:w-full md:max-w-xl">
+      <div className="border border-gray-300 bg-white py-8 px-4 shadow-md dark:border-gray-600 dark:bg-gray-800 sm:rounded-lg sm:px-10 md:mx-auto md:w-full md:max-w-xl">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextField
@@ -72,7 +72,7 @@ export const Profile = () => {
                 })}
               >
                 <input {...getInputProps()} />
-                <div className="font-medium text-base text-gray-500 flex flex-col items-center gap-y-2">
+                <div className="flex flex-col items-center gap-y-2 text-base font-medium text-gray-500">
                   {imageUrl ? (
                     <img className="h-16 w-16 rounded-full" src={imageUrl} />
                   ) : (
