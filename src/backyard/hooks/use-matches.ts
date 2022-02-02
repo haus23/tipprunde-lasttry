@@ -1,17 +1,16 @@
-import { useRecoilValue } from 'recoil';
-import { useCurrentChampionship } from './use-current-championship';
-import {
-  add as addMatch,
-  matchesByChampionship,
-} from '@/api/fb-model/match-repository';
-import { Match } from '@/api/fb-model/match';
+import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
+import { matchesState } from '@/api/state/match';
+import { useRealTimeRepository } from '@/api/hooks/use-realtime-repository';
 
 export const useMatches = () => {
   const { championship } = useCurrentChampionship();
-  const matches = useRecoilValue(matchesByChampionship(championship?.id));
+  const { entities: matches, add } = useRealTimeRepository(
+    matchesState(championship?.id),
+    'match'
+  );
 
   return {
     matches,
-    add: (match: Match) => addMatch(championship.id, match),
+    add,
   };
 };

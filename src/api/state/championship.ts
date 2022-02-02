@@ -4,5 +4,5 @@ import { Championship } from '@/api/model/championship';
 
 export const championshipsState = atom<Championship[]>({
   key: 'championships',
-  default: (await supabase.from<Championship>('championships').select()).data,
+  default: (await supabase.from<Championship>('championship').select()).data,
 });

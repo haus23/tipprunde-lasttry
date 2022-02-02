@@ -11,9 +11,9 @@ import { useLeagues } from '@/backyard/hooks/use-leagues';
 import { useTeams } from '@/backyard/hooks/use-teams';
 import { TeamForm } from '@/backyard/components/forms/team-form';
 import { Team } from '@/api/model/team';
-import { League } from '@/api/fb-model/league';
+import { League } from '@/api/model/league';
 
-type MatchFormType = {
+export type MatchFormType = {
   date: string;
   league: League;
   firstTeam: Team;
@@ -21,17 +21,17 @@ type MatchFormType = {
 };
 
 export type MatchFormProps = {
-  onAddMatch: () => void;
+  onAddMatch: (match: MatchFormType) => void;
 };
 
-export const MatchForm = () => {
+export const MatchForm = ({ onAddMatch }: MatchFormProps) => {
   const { add: addLeague, leagues } = useLeagues();
   const { add: addTeam, teams } = useTeams();
   const [leagueDialogOpen, setLeagueDialogOpen] = useState(false);
   const [teamDialogOpen, setTeamDialogOpen] = useState(false);
 
   const onSubmit: SubmitHandler<MatchFormType> = async (data) => {
-    console.log(data);
+    onAddMatch(data);
   };
 
   const { control, register, handleSubmit } = useForm<MatchFormType>({});

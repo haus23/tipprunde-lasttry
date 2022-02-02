@@ -6,7 +6,7 @@ export const useRounds = () => {
   const { championship } = useCurrentChampionship();
   const { entities: rounds, add } = useRepository(
     roundsState(championship?.id),
-    'rounds'
+    'round'
   );
 
   return {

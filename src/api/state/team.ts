@@ -4,5 +4,5 @@ import { Team } from '@/api/model/team';
 
 export const teamsState = atom<Team[]>({
   key: 'teams',
-  default: (await supabase.from<Team>('teams').select()).data,
+  default: (await supabase.from<Team>('team').select()).data,
 });
