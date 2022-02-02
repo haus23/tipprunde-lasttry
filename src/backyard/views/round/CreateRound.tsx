@@ -1,23 +1,29 @@
 import { useRef, useState } from 'react';
-import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
-import { Button } from '@/common/components/button/Button';
-import { Round } from '@/api/fb-model/round';
+
+import { Round } from '@/api/model/round';
+import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
 import { useRounds } from '@/backyard/hooks/use-rounds';
+
+import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { FormPanel } from '@/common/components/form-panel/FormPanel';
 import { MatchForm } from '@/backyard/components/forms/match-form';
+import { Button } from '@/common/components/button/Button';
 
 export const CreateRound = () => {
+  const { championship } = useCurrentChampionship();
   const { rounds, add } = useRounds();
   const nextNr = useRef(rounds.length + 1);
 
   const [round, setRound] = useState<Round>();
 
   const createRound = async () => {
-    const createdRound = await add({
+    const createdRound = {
+      championship_id: championship.id,
       nr: nextNr.current,
       published: false,
       completed: false,
-    });
+    };
+    await add(createdRound);
     setRound(createdRound);
   };
 

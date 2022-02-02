@@ -1,17 +1,16 @@
-import { Round } from '@/api/fb-model/round';
-import {
-  add as addRound,
-  roundsByChampionship,
-} from '@/api/fb-model/round-repository';
-import { useRecoilValue } from 'recoil';
-import { useCurrentChampionship } from './use-current-championship';
+import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
+import { useRepository } from '@/api/hooks/use-repository';
+import { roundsState } from '@/api/state/rounds';
 
 export const useRounds = () => {
   const { championship } = useCurrentChampionship();
-  const rounds = useRecoilValue(roundsByChampionship(championship?.id));
+  const { entities: rounds, add } = useRepository(
+    roundsState(championship?.id),
+    'rounds'
+  );
 
   return {
     rounds,
-    add: (round: Round) => addRound(championship.id, round),
+    add,
   };
 };

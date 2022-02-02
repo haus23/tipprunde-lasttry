@@ -1,21 +1,11 @@
-import { atom, useRecoilValue } from 'recoil';
-
-import { League } from '@/api/fb-model/league';
-import { supabase } from '@/api/supabase';
-
-const leaguesState = atom<League[]>({
-  key: 'leagues',
-  default: (await supabase.from<League>('leagues').select()).data,
-});
+import { useRepository } from '@/api/hooks/use-repository';
+import { leaguesState } from '@/api/state/league';
 
 export const useLeagues = () => {
-  const leagues = useRecoilValue(leaguesState);
+  const { entities: leagues, add } = useRepository(leaguesState, 'leagues');
 
   return {
     leagues,
-    addLeague: async (league: League) => {
-      const data = (await supabase.from<League>('leagues').insert(league)).data;
-      console.log('Created', data);
-    },
+    add,
   };
 };

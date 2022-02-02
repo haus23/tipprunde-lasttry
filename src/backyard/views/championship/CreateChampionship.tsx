@@ -25,7 +25,7 @@ export const CreateChampionship = () => {
 
   const handleTitleChange = () => {
     if (!dirtyFields.id) {
-      const name = getValues('name');
+      const name = getValues('title');
       const stdPattern = /^([HRWE]).*(\d{2})\/?(\d{2})$/;
       const match = name.match(stdPattern);
       if (match) {
@@ -38,10 +38,10 @@ export const CreateChampionship = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<Championship> = async ({ slug, name, nr }) => {
+  const onSubmit: SubmitHandler<Championship> = async ({ slug, title, nr }) => {
     const championship: Championship = {
       slug,
-      name,
+      title,
       nr,
       published: false,
       completed: false,
@@ -73,7 +73,7 @@ export const CreateChampionship = () => {
                     'Genau sechs Zeichen - zwei Kleinbuchstaben und dann vier Ziffern',
                 },
                 validate: {
-                  uniqueId: (slug) =>
+                  uniqueSlug: (slug) =>
                     !championships.some((c) => c.slug === slug) ||
                     'Turnier mit dieser Kennung existiert schon',
                 },
@@ -84,8 +84,8 @@ export const CreateChampionship = () => {
             <TextField
               autoFocus
               label="Titel"
-              errorMsg={errors.name?.message}
-              {...register('name', {
+              errorMsg={errors.title?.message}
+              {...register('title', {
                 required: 'Pflichtfeld',
                 onBlur: handleTitleChange,
               })}

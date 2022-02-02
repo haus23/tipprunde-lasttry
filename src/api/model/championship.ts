@@ -1,8 +1,7 @@
-import { AggregateRoot } from '@/api/model/base';
+import { BaseModel } from '@/api/model/base';
 
-export interface Championship extends AggregateRoot {
-  id?: number;
-  name: string;
+export interface Championship extends BaseModel {
+  title: string;
   slug: string;
   nr: number;
   published: boolean;

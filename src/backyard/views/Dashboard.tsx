@@ -32,7 +32,7 @@ export const Dashboard = () => {
     <ContentPanel title="Hinterhof">
       {championship !== null && (
         <h2 className="pb-4 text-lg font-semibold">
-          Turnier: {championship.name}
+          Turnier: {championship.title}
         </h2>
       )}
 
