@@ -3,7 +3,7 @@ import { Championship } from './championship';
 import { orderBy } from 'firebase/firestore';
 
 const { docs: championshipDocs, add } = repository<Championship>(
-  'championships',
+  'championshipsState',
   'championships',
   orderBy('nr', 'desc')
 );

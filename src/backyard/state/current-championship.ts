@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
-import { Championship } from '@/api/fb-model/championship';
-import { championshipDocs } from '@/api/fb-model/championship-repository';
+import { championshipsState } from '@/api/state/championship';
+import { Championship } from '@/api/model/championship';
 
 export const currentChampionshipState = atom<Championship>({
   key: 'backyard-currentChampionship-state',
@@ -13,7 +13,7 @@ export const currentChampionshipQuery = selector<Championship>({
     const current = get(currentChampionshipState);
     if (current) return current;
 
-    const championships = get(championshipDocs);
+    const championships = get(championshipsState);
     return championships.length ? championships[0] : null;
   },
   set: ({ set }, championship) => set(currentChampionshipState, championship),

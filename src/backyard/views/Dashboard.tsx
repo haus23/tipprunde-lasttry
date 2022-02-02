@@ -3,7 +3,7 @@ import { CalendarIcon, FolderAddIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { useCurrentChampionship } from '../hooks/use-current-championship';
-import { Championship } from '@/api/fb-model/championship';
+import { Championship } from '@/api/model/championship';
 
 const items = [
   {
@@ -32,7 +32,7 @@ export const Dashboard = () => {
     <ContentPanel title="Hinterhof">
       {championship !== null && (
         <h2 className="pb-4 text-lg font-semibold">
-          Turnier: {championship.title}
+          Turnier: {championship.name}
         </h2>
       )}
 

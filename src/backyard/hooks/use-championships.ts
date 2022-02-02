@@ -1,8 +1,8 @@
-import { add, championshipDocs } from '@/api/fb-model/championship-repository';
-import { useRecoilValue } from 'recoil';
+import { useRepository } from '@/api/hooks/use-repository';
+import { championshipsState } from '@/api/state/championship';
 
 export const useChampionships = () => {
-  const championships = useRecoilValue(championshipDocs);
+  const { entities: championships, add } = useRepository(championshipsState);
 
   return {
     championships,
