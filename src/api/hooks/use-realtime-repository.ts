@@ -9,8 +9,7 @@ export const useRealTimeRepository = <T extends BaseModel>(
   const entities = useRecoilValue(state);
 
   const add = async (entity: T) => {
-    const created = (await supabase.from<T>(table).insert(entity)).data;
-    return created[0];
+    await supabase.from<T>(table).insert(entity, { returning: 'minimal' });
   };
 
   return { entities, add };
