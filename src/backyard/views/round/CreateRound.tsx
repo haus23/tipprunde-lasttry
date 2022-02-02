@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
-import { Round } from '@/api/model/round';
+import { Round } from '@/api/fb-model/round';
 import { useRounds } from '@/backyard/hooks/use-rounds';
 import { FormPanel } from '@/common/components/form-panel/FormPanel';
 import { MatchForm } from '@/backyard/components/forms/match-form';
@@ -27,7 +27,7 @@ export const CreateRound = () => {
         {round ? (
           <MatchForm />
         ) : (
-          <FormPanel className="flex items-center justify-between max-w-2xl">
+          <FormPanel className="flex max-w-2xl items-center justify-between">
             <h2 className="text-lg font-semibold">
               Neue Runde {nextNr.current}
             </h2>

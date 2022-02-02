@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { League } from '@/api/model/league';
+import { League } from '@/api/fb-model/league';
 import { Button } from '@/common/components/button/Button';
 import { TextField } from '@/common/components/text-field/TextField';
 

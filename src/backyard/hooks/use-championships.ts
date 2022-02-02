@@ -1,4 +1,4 @@
-import { add, championshipDocs } from '@/api/model/championship-repository';
+import { add, championshipDocs } from '@/api/fb-model/championship-repository';
 import { useRecoilValue } from 'recoil';
 
 export const useChampionships = () => {

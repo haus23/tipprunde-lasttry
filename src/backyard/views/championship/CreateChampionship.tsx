@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Championship } from '@/api/model/championship';
+import { Championship } from '@/api/fb-model/championship';
 import { ContentPanel } from '@/backyard/components/content-panel/ContentPanel';
 import { TextField } from '@/common/components/text-field/TextField';
 import { Button } from '@/common/components/button/Button';

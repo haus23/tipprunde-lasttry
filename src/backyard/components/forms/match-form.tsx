@@ -4,8 +4,8 @@ import { AutocompleteField } from '@/common/components/autocomplete-field/Autoco
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/common/components/button/Button';
 
-import { League } from '@/api/model/league';
-import { Team } from '@/api/model/team';
+import { League } from '@/api/fb-model/league';
+import { Team } from '@/api/fb-model/team';
 import { LeagueForm } from '@/backyard/components/forms/league-form';
 import { ModalDialog } from '@/backyard/components/modal-dialog/ModalDialog';
 import { useState } from 'react';

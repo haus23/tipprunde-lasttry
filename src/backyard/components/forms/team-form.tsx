@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import { Button } from '@/common/components/button/Button';
 import { TextField } from '@/common/components/text-field/TextField';
-import { Team } from '@/api/model/team';
+import { Team } from '@/api/fb-model/team';
 
 export type TeamFormProps = {
   onSave: (team: Team) => void;

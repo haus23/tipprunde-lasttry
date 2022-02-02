@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
-import { Championship } from '@/api/model/championship';
-import { championshipDocs } from '@/api/model/championship-repository';
+import { Championship } from '@/api/fb-model/championship';
+import { championshipDocs } from '@/api/fb-model/championship-repository';
 
 export const currentChampionshipState = atom<Championship>({
   key: 'backyard-currentChampionship-state',

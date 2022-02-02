@@ -6,7 +6,7 @@ import {
   ExclamationCircleIcon,
   SelectorIcon,
 } from '@heroicons/react/outline';
-import { DisplayableBaseModel } from '@/api/model/common/base-model';
+import { DisplayableBaseModel } from '@/api/fb-model/common/base-model';
 
 export type AutocompleteFieldProps<T> = {
   label: string;

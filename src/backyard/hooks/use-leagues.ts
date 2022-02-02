@@ -1,6 +1,6 @@
 import { atom, useRecoilValue } from 'recoil';
 
-import { League } from '@/api/model/league';
+import { League } from '@/api/fb-model/league';
 import { supabase } from '@/api/supabase';
 
 const leaguesState = atom<League[]>({

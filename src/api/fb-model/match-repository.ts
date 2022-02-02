@@ -1,5 +1,5 @@
 import { repositoryFamily } from './common/repository-family';
-import { Match } from '@/api/model/match';
+import { Match } from '@/api/fb-model/match';
 
 const { docs: matchesByChampionship, add } = repositoryFamily<Match>(
   'matches-by-championship',

@@ -1,8 +1,8 @@
-import { Round } from '@/api/model/round';
+import { Round } from '@/api/fb-model/round';
 import {
   add as addRound,
   roundsByChampionship,
-} from '@/api/model/round-repository';
+} from '@/api/fb-model/round-repository';
 import { useRecoilValue } from 'recoil';
 import { useCurrentChampionship } from './use-current-championship';
 

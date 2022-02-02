@@ -1,6 +1,6 @@
 import { atom, useRecoilValue } from 'recoil';
 
-import { Team } from '@/api/model/team';
+import { Team } from '@/api/fb-model/team';
 import { supabase } from '@/api/supabase';
 
 const teamsState = atom<Team[]>({

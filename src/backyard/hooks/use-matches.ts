@@ -3,8 +3,8 @@ import { useCurrentChampionship } from './use-current-championship';
 import {
   add as addMatch,
   matchesByChampionship,
-} from '@/api/model/match-repository';
-import { Match } from '@/api/model/match';
+} from '@/api/fb-model/match-repository';
+import { Match } from '@/api/fb-model/match';
 
 export const useMatches = () => {
   const { championship } = useCurrentChampionship();

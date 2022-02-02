@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 import { SidebarLink } from '../sidebar-link/SidebarLink';
 import { useRounds } from '@/backyard/hooks/use-rounds';
 import { ElementType } from 'react';
-import { Championship } from '@/api/model/championship';
-import { Round } from '@/api/model/round';
+import { Championship } from '@/api/fb-model/championship';
+import { Round } from '@/api/fb-model/round';
 import { useProfile } from '@/lib/hooks/use-profile';
 
 const sidebarLinks: {
