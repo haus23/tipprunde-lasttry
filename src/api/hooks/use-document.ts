@@ -11,7 +11,6 @@ export const useDocument = <T extends BaseModel>(
   const update = async (entity: T) => {
     const updated = (await supabase.from<T>(table).upsert(entity).single())
       .data;
-    console.log(updated);
     setEntity(updated);
   };
 

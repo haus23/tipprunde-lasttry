@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -13,15 +13,17 @@ import { Profile } from '@/lib/model/profile';
 
 export const ViewProfile = () => {
   const { profile, updateProfile } = useProfile();
-  const [imageUrl, setImageUrl] = useState(profile.avatarUrl);
+  const [imageUrl, setImageUrl] = useState<string>(null);
   const [avatar, setAvatar] = useState<File>(null);
 
+  console.log(imageUrl);
+
+  useEffect(() => {
+    setImageUrl(profile.avatarUrl);
+  }, [profile]);
+
   const onSubmit: SubmitHandler<Profile> = async ({ name }) => {
-    console.log(avatar.name);
-    notify(
-      updateProfile(name.trim(), imageUrl),
-      'Profil erfolgreich geändert.'
-    );
+    notify(updateProfile(name.trim(), avatar), 'Profil erfolgreich geändert.');
   };
 
   const { register, handleSubmit } = useForm<Profile>({
