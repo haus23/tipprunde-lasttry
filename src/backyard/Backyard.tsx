@@ -3,7 +3,7 @@ import { Layout } from './Layout';
 
 import { Dashboard } from './views/Dashboard';
 import { Matches } from './views/Matches';
-import { Profile } from './views/Profile';
+import { ViewProfile } from './views/ViewProfile';
 import { CreateChampionship } from './views/championship/CreateChampionship';
 import { ViewChampionship } from './views/championship/ViewChampionship';
 import { CreateRound } from './views/round/CreateRound';
@@ -17,7 +17,7 @@ export const Backyard = () => {
         <Route path="spiele" element={<Matches />} />
         <Route path="neues-turnier" element={<CreateChampionship />} />
         <Route path="neue-runde" element={<CreateRound />} />
-        <Route path="profil" element={<Profile />} />
+        <Route path="profil" element={<ViewProfile />} />
       </Route>
     </Routes>
   );

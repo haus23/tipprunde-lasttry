@@ -5,6 +5,7 @@ export const useAuth = () => {
   const authSession = useRecoilValue(authState);
 
   return {
+    user: authSession?.user,
     isAuthenticated: authSession !== null,
     logIn: async (email: string, successHandler: () => void) => {
       await logIn(email);

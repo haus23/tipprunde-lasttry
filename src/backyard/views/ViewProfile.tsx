@@ -8,25 +8,24 @@ import { TextField } from '@/common/components/text-field/TextField';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { notify } from '@/common/components/notifications/Notifications';
-import { useFbAuth } from '@/common/hooks/use-fb-auth';
+import { useProfile } from '@/lib/hooks/use-profile';
+import { Profile } from '@/lib/model/profile';
 
-type ProfileFormType = {
-  displayName: string;
-  email: string;
-};
-
-export const Profile = () => {
-  const { user, updateUser } = useFbAuth();
-  const [imageUrl, setImageUrl] = useState(user.photoURL);
+export const ViewProfile = () => {
+  const { profile, updateProfile } = useProfile();
+  const [imageUrl, setImageUrl] = useState(profile.avatarUrl);
   const [avatar, setAvatar] = useState<File>(null);
 
-  const onSubmit: SubmitHandler<ProfileFormType> = async ({ displayName }) => {
-    displayName = displayName.trim();
-    notify(updateUser(displayName, avatar), 'Profil erfolgreich geändert.');
+  const onSubmit: SubmitHandler<Profile> = async ({ name }) => {
+    console.log(avatar.name);
+    notify(
+      updateProfile(name.trim(), imageUrl),
+      'Profil erfolgreich geändert.'
+    );
   };
 
-  const { register, handleSubmit } = useForm<ProfileFormType>({
-    defaultValues: user,
+  const { register, handleSubmit } = useForm<Profile>({
+    defaultValues: profile,
   });
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -58,7 +57,7 @@ export const Profile = () => {
             />
           </div>
           <div>
-            <TextField label="Name" {...register('displayName')} />
+            <TextField label="Name" {...register('name')} />
           </div>
           <div>
             <label className="block">
