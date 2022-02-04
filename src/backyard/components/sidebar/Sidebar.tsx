@@ -1,17 +1,18 @@
-import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
-import { Logo } from '@/common/components/logo/Logo';
+import { ElementType } from 'react';
+import { Link } from 'react-router-dom';
 import {
   CalendarIcon,
   FolderIcon,
   HomeIcon,
   UserIcon,
 } from '@heroicons/react/outline';
-import { Link } from 'react-router-dom';
-import { SidebarLink } from '../sidebar-link/SidebarLink';
+
+import { Championship } from '@/api/model/championship';
+import { Round } from '@/api/model/round';
+import { SidebarLink } from '@/backyard/components/sidebar-link/SidebarLink';
+import { useCurrentChampionship } from '@/backyard/hooks/use-current-championship';
 import { useRounds } from '@/backyard/hooks/use-rounds';
-import { ElementType } from 'react';
-import { Championship } from '@/api/fb-model/championship';
-import { Round } from '@/api/fb-model/round';
+import { Logo } from '@/common/components/logo/Logo';
 import { useProfile } from '@/lib/hooks/use-profile';
 
 const sidebarLinks: {
