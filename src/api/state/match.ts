@@ -8,7 +8,7 @@ const queryFn = async (championshipId: KeyType) =>
     await supabase
       .from<Match>('match')
       .select(
-        `round(nr), nr, date, league(*), first_team:first_team_id(*), second_team:second_team_id(*)`
+        `id, round(nr), nr, date, league(*), first_team:first_team_id(*), second_team:second_team_id(*)`
       )
       .order('nr')
       .eq('championship_id', championshipId)

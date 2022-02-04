@@ -4,6 +4,7 @@ import { useCurrentChampionship } from '../hooks/use-current-championship';
 import { useRounds } from '../hooks/use-rounds';
 import { useMatches } from '@/backyard/hooks/use-matches';
 import { Match } from '@/api/model/match';
+import { MatchList } from '@/backyard/components/lists/MatchList';
 
 export const Matches = () => {
   const { championship } = useCurrentChampionship();
@@ -46,6 +47,7 @@ export const Matches = () => {
     >
       <h2 className="mb-4 text-lg font-semibold">Runde {rounds[0].nr}</h2>
       <MatchForm onAddMatch={createMatch} />
+      <MatchList matches={matches} />
     </ContentPanel>
   );
 };
