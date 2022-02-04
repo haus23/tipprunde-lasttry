@@ -11,8 +11,6 @@ export const Matches = () => {
   const { rounds } = useRounds();
   const { matches, add } = useMatches();
 
-  console.log(matches);
-
   const currentRound = rounds[rounds.length - 1];
   const nextMatchNr = matches.length + 1;
 
