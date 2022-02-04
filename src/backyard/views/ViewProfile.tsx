@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -8,25 +8,26 @@ import { TextField } from '@/common/components/text-field/TextField';
 import { ContentPanel } from '../components/content-panel/ContentPanel';
 import { Button } from '@/common/components/button/Button';
 import { notify } from '@/common/components/notifications/Notifications';
-import { useAuth } from '@/common/hooks/use-auth';
+import { useProfile } from '@/lib/hooks/use-profile';
+import { Profile } from '@/lib/model/profile';
 
-type ProfileFormType = {
-  displayName: string;
-  email: string;
-};
-
-export const Profile = () => {
-  const { user, updateUser } = useAuth();
-  const [imageUrl, setImageUrl] = useState(user.photoURL);
+export const ViewProfile = () => {
+  const { profile, updateProfile } = useProfile();
+  const [imageUrl, setImageUrl] = useState<string>(null);
   const [avatar, setAvatar] = useState<File>(null);
 
-  const onSubmit: SubmitHandler<ProfileFormType> = async ({ displayName }) => {
-    displayName = displayName.trim();
-    notify(updateUser(displayName, avatar), 'Profil erfolgreich geändert.');
+  console.log(imageUrl);
+
+  useEffect(() => {
+    setImageUrl(profile.avatarUrl);
+  }, [profile]);
+
+  const onSubmit: SubmitHandler<Profile> = async ({ name }) => {
+    notify(updateProfile(name.trim(), avatar), 'Profil erfolgreich geändert.');
   };
 
-  const { register, handleSubmit } = useForm<ProfileFormType>({
-    defaultValues: user,
+  const { register, handleSubmit } = useForm<Profile>({
+    defaultValues: profile,
   });
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -46,7 +47,7 @@ export const Profile = () => {
 
   return (
     <ContentPanel title={<div>Profil</div>}>
-      <div className="bg-white dark:bg-gray-800 py-8 px-4 border border-gray-300 dark:border-gray-600 shadow-md sm:rounded-lg sm:px-10 md:mx-auto md:w-full md:max-w-xl">
+      <div className="border border-gray-300 bg-white py-8 px-4 shadow-md dark:border-gray-600 dark:bg-gray-800 sm:rounded-lg sm:px-10 md:mx-auto md:w-full md:max-w-xl">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextField
@@ -58,7 +59,7 @@ export const Profile = () => {
             />
           </div>
           <div>
-            <TextField label="Name" {...register('displayName')} />
+            <TextField label="Name" {...register('name')} />
           </div>
           <div>
             <label className="block">
@@ -72,7 +73,7 @@ export const Profile = () => {
                 })}
               >
                 <input {...getInputProps()} />
-                <div className="font-medium text-base text-gray-500 flex flex-col items-center gap-y-2">
+                <div className="flex flex-col items-center gap-y-2 text-base font-medium text-gray-500">
                   {imageUrl ? (
                     <img className="h-16 w-16 rounded-full" src={imageUrl} />
                   ) : (

@@ -6,11 +6,12 @@ import {
   ExclamationCircleIcon,
   SelectorIcon,
 } from '@heroicons/react/outline';
-import { DisplayableBaseModel } from '@/api/model/common/base-model';
+import { BaseModel } from '@/api/model/base';
 
 export type AutocompleteFieldProps<T> = {
   label: string;
   items: T[];
+  itemToString: (item: T) => string;
   initialSelectedItem: T;
   onChange: (item: T) => void;
   onAdd: () => void;
@@ -18,9 +19,10 @@ export type AutocompleteFieldProps<T> = {
   className?: string;
 };
 
-export const AutocompleteField = <T extends DisplayableBaseModel>({
+export const AutocompleteField = <T extends BaseModel>({
   label,
   items,
+  itemToString,
   initialSelectedItem,
   errorMsg,
   className,
@@ -51,12 +53,12 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
     onInputValueChange: ({ inputValue }) => {
       setInputItems(
         items.filter((item) =>
-          item.name.toLowerCase().includes(inputValue.toLowerCase())
+          itemToString(item).toLowerCase().includes(inputValue.toLowerCase())
         )
       );
     },
     initialSelectedItem,
-    itemToString: (item) => item.name,
+    itemToString,
     onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem),
   });
 
@@ -140,7 +142,7 @@ export const AutocompleteField = <T extends DisplayableBaseModel>({
                         'block truncate'
                       )}
                     >
-                      {item.name}
+                      {itemToString(item)}
                     </span>
 
                     {selectedItem === item ? (

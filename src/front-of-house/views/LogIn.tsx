@@ -2,57 +2,49 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { TextField } from '@/common/components/text-field/TextField';
 import { Button } from '@/common/components/button/Button';
 import { useEffect, useState } from 'react';
-import { Location, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/common/hooks/use-auth';
+import { useNavigate } from 'react-router-dom';
 import { FormPanel } from '@/common/components/form-panel/FormPanel';
+import { useAuth } from '@/lib/hooks/use-auth';
 
 type LoginFormType = {
   email: string;
-  password: string;
 };
 
 export const LogIn = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const { user, logIn } = useAuth();
+  const { isAuthenticated, logIn } = useAuth();
 
   useEffect(() => {
-    if (user) {
+    if (isAuthenticated) {
       navigate('/', { replace: true });
     }
-  }, [user, navigate]);
+  }, [isAuthenticated, navigate]);
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormType>();
 
-  const state = location.state as { from: Location } | null;
-  const from = state?.from.pathname || '/';
-
-  const onSubmit: SubmitHandler<LoginFormType> = async ({
-    email,
-    password,
-  }) => {
+  const onSubmit: SubmitHandler<LoginFormType> = async ({ email }) => {
     try {
-      await logIn(email, password, () => navigate(from, { replace: true }));
+      await logIn(email, () => navigate('/', { replace: true }));
     } catch {
-      setError('Email und/oder Passwort falsch!');
+      setError(true);
     }
   };
 
   return (
-    <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="text-center text-3xl font-semibold text-gray-900 dark:text-gray-50">
           Anmeldung
         </h2>
       </div>
 
-      <FormPanel className="mt-8">
+      <FormPanel className="mt-8 max-w-lg">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextField
@@ -63,25 +55,18 @@ export const LogIn = () => {
             />
           </div>
 
-          <div>
-            <TextField
-              label="Passwort"
-              type="password"
-              errorMsg={errors.password?.message}
-              {...register('password', {
-                required: 'Passwort muss schon sein ;-)',
-              })}
-            />
-          </div>
-
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <Button primary className="w-32" type="submit">
-              Log In
+              Link schicken
             </Button>
           </div>
           {error && (
-            <div className="text-red-500 text-center">
-              <p>{error}</p>
+            <div className="text-center text-red-500">
+              <p>
+                Du bist nicht registriert (mit dieser Email-Adresse).
+                <br />
+                Wende dich an den Chef ;-)
+              </p>
             </div>
           )}
         </form>

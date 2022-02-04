@@ -1,5 +1,7 @@
-import { DisplayableBaseModel } from './common/base-model';
+import { BaseModel } from '@/api/model/base/index';
 
-export interface Team extends DisplayableBaseModel {
-  shortName: string;
+export interface Team extends BaseModel {
+  name: string;
+  slug: string;
+  short_name: string;
 }

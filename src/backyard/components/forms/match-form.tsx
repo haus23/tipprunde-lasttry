@@ -4,16 +4,16 @@ import { AutocompleteField } from '@/common/components/autocomplete-field/Autoco
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/common/components/button/Button';
 
-import { League } from '@/api/model/league';
-import { Team } from '@/api/model/team';
 import { LeagueForm } from '@/backyard/components/forms/league-form';
 import { ModalDialog } from '@/backyard/components/modal-dialog/ModalDialog';
 import { useState } from 'react';
 import { useLeagues } from '@/backyard/hooks/use-leagues';
 import { useTeams } from '@/backyard/hooks/use-teams';
 import { TeamForm } from '@/backyard/components/forms/team-form';
+import { Team } from '@/api/model/team';
+import { League } from '@/api/model/league';
 
-type MatchFormType = {
+export type MatchFormType = {
   date: string;
   league: League;
   firstTeam: Team;
@@ -21,17 +21,17 @@ type MatchFormType = {
 };
 
 export type MatchFormProps = {
-  onAddMatch: () => void;
+  onAddMatch: (match: MatchFormType) => void;
 };
 
-export const MatchForm = () => {
-  const { addLeague, leagues } = useLeagues();
-  const { addTeam, teams } = useTeams();
+export const MatchForm = ({ onAddMatch }: MatchFormProps) => {
+  const { add: addLeague, leagues } = useLeagues();
+  const { add: addTeam, teams } = useTeams();
   const [leagueDialogOpen, setLeagueDialogOpen] = useState(false);
   const [teamDialogOpen, setTeamDialogOpen] = useState(false);
 
   const onSubmit: SubmitHandler<MatchFormType> = async (data) => {
-    console.log(data);
+    onAddMatch(data);
   };
 
   const { control, register, handleSubmit } = useForm<MatchFormType>({});
@@ -54,6 +54,7 @@ export const MatchForm = () => {
                 className="col-span-4 sm:col-span-3 sm:col-start-4 md:col-span-4 lg:col-span-3 lg:col-start-4"
                 label="Liga / Runde / Gruppe / Wettbewerb"
                 items={leagues}
+                itemToString={(item: League) => item.name}
                 initialSelectedItem={value}
                 onChange={onChange}
                 onAdd={() => setLeagueDialogOpen(true)}
@@ -68,6 +69,7 @@ export const MatchForm = () => {
                 className="col-span-6 lg:col-span-4"
                 label="Wer?"
                 items={teams}
+                itemToString={(item: Team) => item.name}
                 initialSelectedItem={value}
                 onChange={onChange}
                 onAdd={() => setTeamDialogOpen(true)}
@@ -82,6 +84,7 @@ export const MatchForm = () => {
                 className="col-span-6 lg:col-span-4"
                 label="Gegen wen?"
                 items={teams}
+                itemToString={(item: Team) => item.name}
                 initialSelectedItem={value}
                 onChange={onChange}
                 onAdd={() => setTeamDialogOpen(true)}

@@ -1,11 +1,11 @@
-import { useRecoilValue } from 'recoil';
-import { add as addLeague, leagueDocs } from '@/api/model/league-repository';
+import { useRepository } from '@/api/hooks/use-repository';
+import { leaguesState } from '@/api/state/league';
 
 export const useLeagues = () => {
-  const leagues = useRecoilValue(leagueDocs);
+  const { entities: leagues, add } = useRepository(leaguesState, 'league');
 
   return {
     leagues,
-    addLeague,
+    add,
   };
 };
